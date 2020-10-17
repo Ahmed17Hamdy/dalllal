@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "95524954739",
+    "firebase_url": "https://dallal-6bdac.firebaseio.com",
+    "project_id": "dallal-6bdac",
+    "storage_bucket": "dallal-6bdac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95524954739:android:f0cd5f49eea28822ad0006",
+        "android_client_info": {
+          "package_name": "com.ittezan.dalllalalarab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95524954739-a2q92oqks1u5v7vkbp9fb81125se9cib.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYH03h6yccxxQPyXdjnz3FRFv2VKTBxlE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95524954739-a2q92oqks1u5v7vkbp9fb81125se9cib.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
