@@ -20,6 +20,17 @@ class Chat extends StatefulWidget {
 class _ChatState extends State<Chat> with AfterLayoutMixin<Chat> {
   List<ConversationModel> list = [];
   bool isLoading = true;
+  Future<void> _getnotifications() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    userId = prefs.getInt("User_id") ?? 0;
+    if (userId != 0 && userId != null) {
+      UserServices serviceApi = UserServices();
+      await serviceApi.getConversationModel();
+      setState(() {
+        list = serviceApi.listChat;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -160,22 +171,30 @@ class _ChatState extends State<Chat> with AfterLayoutMixin<Chat> {
     );
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _getnotifications();
+  }
+
   int userId = 0;
 
   @override
   Future<void> afterFirstLayout(BuildContext context) async {
     // print("object");
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    userId = prefs.getInt("User_id" ?? 0);
+    userId = prefs.getInt("User_id") ?? 0;
     if (userId != 0) {
       try {
         UserServices serviceApi = UserServices();
         await serviceApi.getConversationModel();
 
         list = serviceApi.listChat;
-        var lastlist = list.where((ad) => ad.lastchat.view == 0).toList();
-        if (lastlist != null && lastlist.length != 0) {
-          itemsClient = badger.setBadge(itemsClient, "${list.length}", 3);
+        if (list.length != null && list.length != 0) {
+          var lastlist = list.where((ad) => ad.lastchat.view == 0).toList();
+
+          itemsClient = badger.setBadge(
+              itemsClient, lastlist.length != 0 ? "${lastlist.length}" : "", 3);
         }
       } catch (e) {
         list = [];

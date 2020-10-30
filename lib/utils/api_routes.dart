@@ -1,5 +1,5 @@
 class ApiRoutes {
-  static const String BasicURL = "http://dalllal.com/";
+  static const String BasicURL = "https://dalllal.com/";
   static const String api = BasicURL + "json/";
   static const String allNotifications = api + "allnotifications?user_id=";
   static const String updateNotifications = api + "updateNotificationView";

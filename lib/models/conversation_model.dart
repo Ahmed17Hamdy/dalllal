@@ -99,19 +99,19 @@ class Sender {
   int type;
   String active;
   String image;
-  Null authComplete;
+  String authComplete;
   int codeVerify;
-  Null passwordCodeVerify;
+  String passwordCodeVerify;
   String notf;
   int forbidden;
   String apiToken;
   String createdAt;
   String updatedAt;
-  Null deletedAt;
+  String deletedAt;
   int country;
   int city;
   int evaluation;
-  Null googleToken;
+  String googleToken;
 
   Sender(
       {this.id,
@@ -196,23 +196,23 @@ class Receiver {
   String name;
   String email;
   String phone;
-  Null rank;
+  String rank;
   int type;
   String active;
-  Null image;
+  String image;
   int authComplete;
   int codeVerify;
-  Null passwordCodeVerify;
+  String passwordCodeVerify;
   String notf;
   int forbidden;
-  Null apiToken;
+  String apiToken;
   String createdAt;
   String updatedAt;
-  Null deletedAt;
+  String deletedAt;
   int country;
   int city;
   int evaluation;
-  Null googleToken;
+  String googleToken;
 
   Receiver(
       {this.id,

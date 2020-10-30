@@ -600,8 +600,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
     } else {
       Response response;
       Dio dio = new Dio();
-      dio.options.connectTimeout = 10000;
-      dio.options.receiveTimeout = 30000;
+      dio.options.connectTimeout = 100000;
+      dio.options.receiveTimeout = 300000;
       response = await dio.post("https://dalllal.com/json/showunauthpost",
           data: {"post_id": widget.ads.id});
       Showpost data = new Showpost.fromJson(response.data);
@@ -1057,7 +1057,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                   ? AssetImage(
                                                       'images/user.png')
                                                   : NetworkImage(
-                                                      "http://dalllal.com/dashboard_files/usersimages/" +
+                                                      "https://dalllal.com/dashboard_files/usersimages/" +
                                                           widget
                                                               .ads.user.image),
                                               backgroundColor: Colors.white,
@@ -1100,9 +1100,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                           RatingBar(
                                             ignoreGestures: true,
                                             itemSize: height * 0.02,
-                                            initialRating: widget
-                                                .ads.user.evaluation
-                                                .toDouble(),
+                                            initialRating:
+                                                widget.ads.user.evaluation !=
+                                                        null
+                                                    ? widget.ads.user.evaluation
+                                                        .toDouble()
+                                                    : 0,
                                             minRating: 0,
                                             direction: Axis.horizontal,
                                             allowHalfRating: false,
@@ -1124,7 +1127,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               widget.ads.user.email);
                                           await prefs.setString("ownername",
                                               widget.ads.user.name);
-                                          if (prefs.getInt("User_id") != null) {
+                                          if (userid != 0) {
                                             print(
                                                 widget.ads.user.id.toString());
                                             await UserServices().addNewMSG(
@@ -1140,6 +1143,36 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                       () {},
                                                       isHasBar: true)),
                                             );
+                                          } else {
+                                            AwesomeDialog(
+                                                    aligment: Alignment.center,
+                                                    dismissOnTouchOutside:
+                                                        false,
+                                                    context: context,
+                                                    btnCancelText: "نعم",
+                                                    btnCancelColor:
+                                                        Colors.green,
+                                                    btnOkText: "لا",
+                                                    btnOkColor: Colors.red,
+                                                    headerAnimationLoop: false,
+                                                    dialogType:
+                                                        DialogType.WARNING,
+                                                    animType:
+                                                        AnimType.BOTTOMSLIDE,
+                                                    tittle:
+                                                        'هذه الخاصية بحاجة لتسجيل الدخول ',
+                                                    desc:
+                                                        ' هل تريد تسجيل الدخول ؟ ',
+                                                    btnCancelOnPress: () {
+                                                      Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                LoginPage()),
+                                                      );
+                                                    },
+                                                    btnOkOnPress: () {})
+                                                .show();
                                           }
                                         },
                                         child: Row(
@@ -1229,7 +1262,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                     style: kDetailedTextStyle,
                                                   ),
                                                   Text(
-                                                    widget.ads.title,
+                                                    widget.ads.title != null
+                                                        ? widget.ads.title
+                                                        : "بلا عنوان",
                                                     style: kDetailETextStyle,
                                                   ),
                                                 ],
@@ -1242,7 +1277,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                     "التاريخ  : ",
                                                     style: kDetailedTextStyle,
                                                   ),
-                                                  Text(widget.ads.timeAgo,
+                                                  Text(
+                                                      widget.ads.timeAgo != null
+                                                          ? widget.ads.timeAgo
+                                                          : "",
                                                       style: kDetailETextStyle),
                                                 ],
                                               ),
@@ -1268,7 +1306,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                       style:
                                                           kDetailedTextStyle),
                                                   Text(
-                                                    widget.ads.price,
+                                                    widget.ads.price != null
+                                                        ? widget.ads.price
+                                                        : "غير محدد",
                                                     style: kDetailETextStyle,
                                                   ),
                                                 ],
@@ -1302,7 +1342,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               style: kDetailedTextStyle,
                                             ),
                                             Text(
-                                              widget.ads.body,
+                                              widget.ads.body != null
+                                                  ? widget.ads.body
+                                                  : "",
                                               style: kDetailETextStyle,
                                               overflow: TextOverflow.visible,
                                             ),
@@ -1319,7 +1361,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                             style: kDetailedTextStyle,
                                           ),
                                           Text(
-                                            widget.ads.views.toString(),
+                                            widget.ads.views != null
+                                                ? widget.ads.views.toString()
+                                                : "0",
                                             style: kDetailETextStyle,
                                             overflow: TextOverflow.visible,
                                           ),

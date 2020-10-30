@@ -45,7 +45,7 @@ class _NotificationsState extends State<Notifications>
       final prefs = await SharedPreferences.getInstance();
       // await Future.delayed(Duration(milliseconds: 5000));
 
-      userid = prefs.getInt("User_id");
+      userid = prefs.getInt("User_id") ?? 0;
 
       response = await dio.post("https://dalllal.com/json/notifications",
           data: {"owner_id": userid});
@@ -182,17 +182,18 @@ class _NotificationsState extends State<Notifications>
   Future<void> afterFirstLayout(BuildContext context) async {
     // print("object");
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    userid = prefs.getInt("User_id" ?? 0);
+    userid = prefs.getInt("User_id") ?? 0;
     if (userid != 0) {
       try {
         // UserServices serviceApi = UserServices();
         // await serviceApi.getConversationModel();
         await _getnotifications();
         //    notifiMessage = serviceApi.listChat;
-        var lastlist = notifiMessage.where((ad) => ad.view == 0).toList();
-        if (lastlist != null && lastlist.length != 0) {
-          itemsClient =
-              badger.setBadge(itemsClient, "${notifiMessage.length}", 2);
+        if (notifications != null && notifications.length != 0) {
+          var lastlist = notifications.where((ad) => ad.view == 0).toList();
+
+          itemsClient = badger.setBadge(
+              itemsClient, lastlist.length != 0 ? "${lastlist.length}" : "", 2);
         }
       } catch (e) {
         notifiMessage = [];
