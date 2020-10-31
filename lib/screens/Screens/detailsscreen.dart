@@ -983,7 +983,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             .map((item) => Container(
                                   child: CachedNetworkImage(
                                     fadeInCurve: Curves.easeInBack,
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.contain,
                                     width: width,
                                     height: height * 0.2,
                                     imageUrl: item,
@@ -994,7 +994,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       'images/bc.jpg',
                                       height: height * 0.2,
                                       width: width,
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.contain,
                                     ),
                                   ),
                                 ))
@@ -1258,7 +1258,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               child: Wrap(
                                                 children: <Widget>[
                                                   Text(
-                                                    "إسم المنتج : ",
+                                                    "الإسم : ",
                                                     style: kDetailedTextStyle,
                                                   ),
                                                   Text(
@@ -1302,7 +1302,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               flex: 1,
                                               child: Wrap(
                                                 children: <Widget>[
-                                                  Text('سعر المنتج : ',
+                                                  Text('السعر : ',
                                                       style:
                                                           kDetailedTextStyle),
                                                   Text(
@@ -1338,7 +1338,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         child: Wrap(
                                           children: <Widget>[
                                             Text(
-                                              "تفاصيل المنتج : ",
+                                              "التفاصيل : ",
                                               style: kDetailedTextStyle,
                                             ),
                                             Text(

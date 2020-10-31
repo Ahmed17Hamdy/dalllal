@@ -171,7 +171,6 @@ class _ContactUsState extends State<ContactUs> {
           PreferredSize(child: AppBar(), preferredSize: Size.fromHeight(50.0)),
       body: Form(
         key: _formkeyvalue,
-        autovalidate: false,
         child: Container(
           height: double.infinity,
           width: double.infinity,
@@ -338,7 +337,7 @@ class _ContactUsState extends State<ContactUs> {
                             }),
                             maxLines: 5,
                             keyboardType: TextInputType.text,
-                            maxLength: 50,
+                            maxLength: 200,
                             validator: (value) {
                               if (value.isEmpty) {
                                 return "من فضلك أدخل نص الرسالة";

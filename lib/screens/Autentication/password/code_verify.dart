@@ -1,12 +1,10 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:dalllalalarab/components/custom_form_text.dart';
 import 'package:dalllalalarab/constants.dart';
 import 'package:dalllalalarab/models/sendcodesuc.dart';
 import 'package:dalllalalarab/screens/Autentication/password/confirm_password.dart';
 import 'package:dalllalalarab/screens/Mainscreen/bottom_tabed.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class CodeVerify extends StatefulWidget {

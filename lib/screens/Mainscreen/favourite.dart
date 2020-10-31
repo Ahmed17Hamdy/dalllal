@@ -2,7 +2,6 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dalllalalarab/models/homeclass.dart';
-import 'package:dalllalalarab/models/modelnotification.dart';
 import 'package:dalllalalarab/models/mypost.dart';
 import 'package:dalllalalarab/screens/Mainscreen/bottom_tabed.dart';
 import 'package:dalllalalarab/screens/Screens/detailsscreen.dart';

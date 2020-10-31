@@ -1,7 +1,5 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:dalllalalarab/components/custom_form_text.dart';
 import 'package:dalllalalarab/models/erroredite.dart';
-import 'package:dalllalalarab/models/sendcodesuc.dart';
 import 'package:dalllalalarab/screens/Autentication/login_page.dart';
 import 'package:dalllalalarab/screens/Mainscreen/bottom_tabed.dart';
 import 'package:dio/dio.dart';

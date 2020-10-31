@@ -2,8 +2,6 @@
 //
 //     final conversationModel = conversationModelFromMap(jsonString);
 
-import 'dart:convert';
-
 class ChatResponse {
   bool success;
   List<ConversationModel> data;

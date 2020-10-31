@@ -3,7 +3,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dalllalalarab/constants.dart';
 import 'package:dalllalalarab/models/homeclass.dart';
 import 'package:dalllalalarab/models/mypost.dart';
-import 'package:dalllalalarab/models/showpost.dart';
 import 'package:dalllalalarab/screens/Mainscreen/bottom_tabed.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -238,6 +237,8 @@ class _MyAdsState extends State<MyAds> {
                                                                 .title)),
                                                     Expanded(
                                                       child: RatingBar(
+                                                        onRatingUpdate:
+                                                            (value) {},
                                                         ignoreGestures: true,
                                                         itemSize: height * 0.03,
                                                         initialRating:

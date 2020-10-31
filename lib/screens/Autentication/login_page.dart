@@ -1,6 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:dalllalalarab/Providers/pushnotificationprovider.dart';
 import 'package:dalllalalarab/constants.dart';
 import 'package:dalllalalarab/models/loginfalse.dart';
 import 'package:dalllalalarab/models/logintrue.dart';

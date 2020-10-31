@@ -1,6 +1,5 @@
 import 'package:dalllalalarab/constants.dart';
 import 'package:dalllalalarab/screens/Mainscreen/bottom_tabed.dart';
-import 'package:dalllalalarab/screens/Mainscreen/notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:flutter/material.dart';

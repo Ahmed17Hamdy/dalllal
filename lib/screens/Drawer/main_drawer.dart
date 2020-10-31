@@ -9,11 +9,12 @@ import 'package:dalllalalarab/screens/Drawer/terms_of_use.dart';
 import 'package:dalllalalarab/screens/Mainscreen/bottom_tabed.dart';
 import 'package:dalllalalarab/screens/Screens/add_adds.dart';
 import 'package:dalllalalarab/screens/Drawer/commission.dart';
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants.dart';
+import 'member.dart';
 
 class MainDrawer extends StatefulWidget {
   @override
@@ -218,7 +219,7 @@ class _MainDrawerState extends State<MainDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CommossionPage(),
+                  builder: (context) => MemeberPage(),
                 ),
               );
             },

@@ -1,5 +1,4 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:dalllalalarab/components/custom_form_text.dart';
 import 'package:dalllalalarab/constants.dart';
 import 'package:dalllalalarab/models/sendcodesuc.dart';
 import 'package:dalllalalarab/screens/Autentication/password/code_verify.dart';

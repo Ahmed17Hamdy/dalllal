@@ -794,9 +794,9 @@ class _AddAdsState extends State<AddAds> {
                                 _body = body;
                               });
                             }),
-                            maxLines: 5,
+                            maxLines: 10,
                             keyboardType: TextInputType.text,
-                            maxLength: 300,
+                            maxLength: 500,
                             validator: (value) {
                               if (value.isEmpty) {
                                 return "من فضلك أدخل نص الإعلان";
