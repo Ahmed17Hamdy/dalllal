@@ -1218,7 +1218,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ),
                 SizedBox(height: 10),
                 Container(
-                  height: height * .25,
+                  height: height * .4,
                   child: Stack(
                     alignment: Alignment.topCenter,
                     children: <Widget>[
@@ -1236,7 +1236,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 ),
                                 color: Colors.white,
                               ),
-                              height: height * 0.22,
+                              height: height * 0.4,
                               child: SingleChildScrollView(
                                 child: Column(
                                   mainAxisAlignment:
@@ -1347,6 +1347,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                   : "",
                                               style: kDetailETextStyle,
                                               overflow: TextOverflow.visible,
+                                              maxLines: 10,
+                                              softWrap: true,
                                             ),
                                           ],
                                         ),

@@ -788,25 +788,28 @@ class _AddAdsState extends State<AddAds> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(30, 10, 30, 0),
                         child: TextFormField(
-                            controller: body,
-                            onChanged: ((String body) {
-                              setState(() {
-                                _body = body;
-                              });
-                            }),
-                            maxLines: 10,
-                            keyboardType: TextInputType.text,
-                            maxLength: 500,
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "من فضلك أدخل نص الإعلان";
-                              } else
-                                return null;
-                            },
-                            style: TextStyle(color: kMyColor),
-                            autofocus: false,
-                            decoration: kTextFeildAdd.copyWith(
-                                labelText: 'نص الإعلان')),
+                          enableSuggestions: true,
+                          textInputAction: TextInputAction.newline,
+                          controller: body,
+                          onChanged: ((String body) {
+                            setState(() {
+                              _body = body;
+                            });
+                          }),
+                          maxLines: 10,
+                          keyboardType: TextInputType.multiline,
+                          maxLength: 500,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "من فضلك أدخل نص الإعلان";
+                            } else
+                              return null;
+                          },
+                          style: TextStyle(color: kMyColor),
+                          autofocus: false,
+                          decoration:
+                              kTextFeildAdd.copyWith(labelText: 'نص الإعلان'),
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
