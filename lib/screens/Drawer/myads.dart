@@ -4,6 +4,7 @@ import 'package:dalllalalarab/constants.dart';
 import 'package:dalllalalarab/models/homeclass.dart';
 import 'package:dalllalalarab/models/mypost.dart';
 import 'package:dalllalalarab/screens/Mainscreen/bottom_tabed.dart';
+import 'package:dalllalalarab/screens/Screens/detailsscreen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -115,6 +116,7 @@ class _MyAdsState extends State<MyAds> {
                 width: width,
                 child: FutureBuilder(
                     future: _future,
+                    // ignore: missing_return
                     builder: (context, snapshot) {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
@@ -192,15 +194,15 @@ class _MyAdsState extends State<MyAds> {
                                                     color: Colors.white,
                                                   ),
                                                   child: GestureDetector(
-                                                    // onTap: () =>
-                                                    //     Navigator.push(
-                                                    //         context,
-                                                    //         MaterialPageRoute(
-                                                    //             builder: (_) =>
-                                                    //                 DetailsScreen(
-                                                    //                   ads: adsList[
-                                                    //                       index],
-                                                    //                 ))),
+                                                    onTap: () =>
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (_) =>
+                                                                    DetailsScreen(
+                                                                      ads: adsList[
+                                                                          index],
+                                                                    ))),
                                                     child: CachedNetworkImage(
                                                       fadeInCurve:
                                                           Curves.easeInBack,
@@ -234,18 +236,21 @@ class _MyAdsState extends State<MyAds> {
                                                     Expanded(
                                                         child: Text(
                                                             adsList[index]
-                                                                .title)),
+                                                                .title!=null?adsList[index]
+                                                                .title:"بلا إسم")),
                                                     Expanded(
                                                       child: RatingBar(
                                                         onRatingUpdate:
                                                             (value) {},
                                                         ignoreGestures: true,
                                                         itemSize: height * 0.03,
-                                                        initialRating:
+                                                        initialRating:adsList[index]
+                                                            .user
+                                                            .rank!=null?
                                                             adsList[index]
                                                                 .user
                                                                 .rank
-                                                                .toDouble(),
+                                                                .toDouble():0,
                                                         minRating: 0,
                                                         direction:
                                                             Axis.horizontal,

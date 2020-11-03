@@ -553,7 +553,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             Navigator.pop(context);
                           });
                         },
-                        controller: _btnController,
+
                       ),
                     ),
                   ],
@@ -1264,7 +1264,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                   Text(
                                                     widget.ads.title != null
                                                         ? widget.ads.title
-                                                        : "بلا عنوان",
+                                                        : "بلا إسم",
                                                     style: kDetailETextStyle,
                                                   ),
                                                 ],
@@ -1322,7 +1322,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                     style: kDetailedTextStyle,
                                                   ),
                                                   Text(
-                                                    widget.ads.cityName,
+                                                    widget.ads.cityName!=null?widget.ads.cityName:"بلا مدينة",
                                                     style: kDetailETextStyle,
                                                   ),
                                                 ],
@@ -1754,7 +1754,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                               ),
                                                                               SizedBox(width: 5),
                                                                               Text(
-                                                                                commentlist[index].userName,
+                                                                                commentlist[index].userName!=null?commentlist[index].userName:"بال إسم",
                                                                                 style: kTextStyle,
                                                                               ),
                                                                             ],
@@ -1770,7 +1770,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                                 width: 5,
                                                                               ),
                                                                               Text(
-                                                                                commentlist[index].timeAgo,
+                                                                                commentlist[index].timeAgo!=null?commentlist[index].timeAgo:"",
                                                                                 style: kTextStyle,
                                                                               ),
                                                                             ],
@@ -1786,7 +1786,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                             Wrap(
                                                                           children: <
                                                                               Widget>[
-                                                                            Text(widget.ads.comments[index].body),
+                                                                            Text(widget.ads.comments[index].body!=null?widget.ads.comments[index].body:""),
                                                                           ],
                                                                         ),
                                                                       ),
@@ -1933,10 +1933,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         case ConnectionState.waiting:
                                         case ConnectionState.active:
                                           return Center(
+                                            // ignore: missing_return
                                             child: CircularProgressIndicator(),
                                           );
                                         case ConnectionState.done:
                                           if (snapshot.hasError) {
+                                            // ignore: missing_return
                                             DioError error = snapshot.error;
                                             String message = error.message;
                                             if (error.type ==
@@ -2113,7 +2115,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                         Widget>[
                                                                       Expanded(
                                                                           child:
-                                                                              Text(similaradsList[index].title)),
+                                                                              Text(similaradsList[index].title!=null?similaradsList[index].title:"بلا إسم")),
                                                                       Expanded(
                                                                         child:
                                                                             RatingBar(
@@ -2121,10 +2123,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                               true,
                                                                           itemSize:
                                                                               height * 0.03,
-                                                                          initialRating: similaradsList[index]
+                                                                          initialRating:similaradsList[index]
+                                                                              .user
+                                                                              .rank!=null? similaradsList[index]
                                                                               .user
                                                                               .rank
-                                                                              .toDouble(),
+                                                                              .toDouble():0,
                                                                           minRating:
                                                                               0,
                                                                           direction:
@@ -2396,7 +2400,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                         Widget>[
                                                                       Expanded(
                                                                           child:
-                                                                              Text(similaradsListforcity[index].title)),
+                                                                              Text(similaradsListforcity[index].title!=null?similaradsListforcity[index].title:"بلا إسم")),
                                                                       Expanded(
                                                                         child:
                                                                             RatingBar(
@@ -2404,10 +2408,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                               true,
                                                                           itemSize:
                                                                               height * 0.03,
-                                                                          initialRating: similaradsListforcity[index]
+                                                                          initialRating:similaradsListforcity[index]
+                                                                              .user
+                                                                              .rank!=null? similaradsListforcity[index]
                                                                               .user
                                                                               .rank
-                                                                              .toDouble(),
+                                                                              .toDouble():0,
                                                                           minRating:
                                                                               0,
                                                                           direction:

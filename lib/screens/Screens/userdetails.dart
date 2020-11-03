@@ -760,7 +760,8 @@ class _UserDetailsState extends State<UserDetails> {
                                                                   Expanded(
                                                                       child: Text(
                                                                           pastPosts[index]
-                                                                              .title)),
+                                                                              .title!=null? pastPosts[index]
+                                                                              .title:"بلا إسم")),
                                                                   Expanded(
                                                                     child:
                                                                         RatingBar(
@@ -769,11 +770,14 @@ class _UserDetailsState extends State<UserDetails> {
                                                                       itemSize:
                                                                           height *
                                                                               0.03,
-                                                                      initialRating: pastPosts[
+                                                                      initialRating:pastPosts[
+                                                                      index]
+                                                                          .user
+                                                                          .evaluation!=null? pastPosts[
                                                                               index]
                                                                           .user
                                                                           .evaluation
-                                                                          .toDouble(),
+                                                                          .toDouble():0,
                                                                       minRating:
                                                                           0,
                                                                       direction:
@@ -1044,8 +1048,8 @@ class _UserDetailsState extends State<UserDetails> {
                                                                                 true,
                                                                             itemSize:
                                                                                 height * 0.02,
-                                                                            initialRating:
-                                                                                reviews[index].evaluation.toDouble(),
+                                                                            initialRating:reviews[index].evaluation!=null?
+                                                                                reviews[index].evaluation.toDouble():0,
                                                                             minRating:
                                                                                 0,
                                                                             direction:

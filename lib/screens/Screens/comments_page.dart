@@ -34,6 +34,8 @@ class _CommentsPageState extends State<CommentsPage> {
   Future _future;
 
   Future<void> _refresh() async {
+    final prefs = await SharedPreferences.getInstance();
+    userid = prefs.getInt("User_id");
     var result = await Connectivity().checkConnectivity();
     if (result != ConnectivityResult.none) {
       if (userid != 0 && userid != null) {
@@ -59,7 +61,9 @@ class _CommentsPageState extends State<CommentsPage> {
             data: {"post_id": widget.ads.id});
 
         Showpost data = new Showpost.fromJson(response.data);
+
         setState(() {
+
           comments = data.data[0].post.cmnt;
           commentlist = comments;
         });
@@ -80,24 +84,11 @@ class _CommentsPageState extends State<CommentsPage> {
     }
   }
 
-  Future<void> _fetchdata() async {
+
+
+  void addcomment()async {
     final prefs = await SharedPreferences.getInstance();
     userid = prefs.getInt("User_id");
-    if (userid == null) {
-      userid = 0;
-    }
-    if (userid != 0 && userid != null) {
-      Response response;
-      Dio dio = new Dio();
-      dio.options.connectTimeout = 10000;
-      dio.options.receiveTimeout = 30000;
-      response = await dio.post("https://dalllal.com/json/showpost",
-          data: {"post_id": widget.ads.id, "user_id": userid});
-      return response;
-    }
-  }
-
-  void addcomment() {
     if (userid != 0 && userid != null) {
       AwesomeDialog(
         context: context,
@@ -132,7 +123,17 @@ class _CommentsPageState extends State<CommentsPage> {
                 );
                 if (response.statusCode == 200) {
                   addreport data = new addreport.fromJson(response.data);
+                  Response response1;
+                  Dio dio = new Dio();
 
+                  response1 = await dio.post("https://dalllal.com/json/showpost",
+                      data: {"post_id": widget.ads.id, "user_id": userid});
+
+                  Showpost data1 = new Showpost.fromJson(response1.data);
+                  setState(() {
+                    comments = data1.data[0].post.cmnt;
+                    commentlist = comments;
+                  });
                   final snackBar = SnackBar(
                     backgroundColor: Colors.green,
                     duration: const Duration(milliseconds: 5),
@@ -145,6 +146,7 @@ class _CommentsPageState extends State<CommentsPage> {
                   // Find the Scaffold in the widget tree and use it to show a SnackBar.
                   _scaffoldKey.currentState.showSnackBar(snackBar);
                   _btnController.success();
+                  Navigator.pop(context);
                 }
               } else {
                 final snackBar = SnackBar(
@@ -229,7 +231,7 @@ class _CommentsPageState extends State<CommentsPage> {
                             Navigator.pop(context);
                           });
                         },
-                        controller: _btnController,
+
                       ),
                     ),
                   ],
@@ -267,8 +269,8 @@ class _CommentsPageState extends State<CommentsPage> {
   @override
   void initState() {
     super.initState();
+    _refresh();
 
-    _future = this._fetchdata();
     // if ((subject.text != "") &&
     //     (body.text != "") &&
     //     (subject != null) &&
@@ -282,178 +284,143 @@ class _CommentsPageState extends State<CommentsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
         title: Text("التعليقات "),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: width,
-              height: height * 0.8,
-              child: StreamBuilder(
-                  stream: _future.asStream(),
-                  builder: (context, snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.none:
-                      case ConnectionState.waiting:
-                      case ConnectionState.active:
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: CircularProgressIndicator(),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: width,
+                height: height * 0.8,
+                child:  commentlist.length != 0
+                    ? ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: commentlist.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            top: 20, right: 5, left: 5),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            border: Border.all(
+                                color: mycolor, width: 3),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10.0),
+                            ),
+                            color: Colors.white,
                           ),
-                        );
-                      case ConnectionState.done:
-                        if (snapshot.hasError) {
-                          DioError error = snapshot.error;
-                          String message = error.message;
-                          if (error.type == DioErrorType.CONNECT_TIMEOUT)
-                            message = 'Connection Timeout';
-                          else if (error.type == DioErrorType.RECEIVE_TIMEOUT)
-                            message = 'Receive Timeout';
-                          else if (error.type == DioErrorType.RESPONSE)
-                            message =
-                                '404 server not found ${error.response.statusCode}';
-                          return Padding(
-                            padding: const EdgeInsets.only(top: 50),
-                            child: RefreshIndicator(
-                                child: new ListView(
-                                  children: <Widget>[
-                                    Center(
-                                      child:
-                                          new Text('خطأ في الإتصال بالشبكة '),
-                                    ),
-                                  ],
-                                ),
-                                onRefresh: () {
-                                  return _future = _refresh();
-                                }),
-                          );
-                        }
-                        Response response = snapshot.data;
-                        Showpost data = new Showpost.fromJson(response.data);
-                        commentlist = data.data[0].post.cmnt;
-                        return commentlist.length != 0
-                            ? ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                itemCount: commentlist.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 20, right: 5, left: 5),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        border: Border.all(
-                                            color: mycolor, width: 3),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0),
-                                        ),
-                                        color: Colors.white,
+                          height: height * .2,
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: Column(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment
+                                        .spaceBetween,
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            FontAwesomeIcons.userAlt,
+                                            color: Color(0xFF31533A),
+                                            size: 15,
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            commentlist[index]
+                                                .userName!=null?commentlist[index]
+                                                .userName:"بلا إسم",
+                                            style: kTextStyle,
+                                          ),
+                                        ],
                                       ),
-                                      height: height * .15,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            FontAwesomeIcons.clock,
+                                            color: Color(0xFF31533A),
+                                            size: 12,
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            commentlist[index]
+                                                .timeAgo!=null?commentlist[index]
+                                                .timeAgo:"",
+                                            style: kTextStyle,
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+
+                                  Row(
+
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween
+                                    ,
+                                    children: <Widget>[
+                                      SingleChildScrollView(
+                                        child: Wrap(
                                           children: <Widget>[
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: <Widget>[
-                                                Row(
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      FontAwesomeIcons.userAlt,
-                                                      color: Color(0xFF31533A),
-                                                      size: 15,
-                                                    ),
-                                                    SizedBox(width: 5),
-                                                    Text(
-                                                      commentlist[index]
-                                                          .userName,
-                                                      style: kTextStyle,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      FontAwesomeIcons.clock,
-                                                      color: Color(0xFF31533A),
-                                                      size: 12,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Text(
-                                                      commentlist[index]
-                                                          .timeAgo,
-                                                      style: kTextStyle,
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            SingleChildScrollView(
-                                              child: Wrap(
-                                                children: <Widget>[
-                                                  Text(commentlist[index].body),
-                                                ],
-                                              ),
-                                            ),
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: <Widget>[
-                                                Icon(
-                                                  Icons.flag,
-                                                  color: Color(0xFF31533A),
-                                                )
-                                              ],
-                                            )
+                                            Text(commentlist[index].body!=null?commentlist[index].body:""),
                                           ],
                                         ),
                                       ),
-                                    ),
-                                  );
-                                })
-                            : Center(child: Text("لا يوجد تعليقات "));
-                    }
-                  }),
-            ),
-            Container(
-              child: GestureDetector(
-                onTap: () {
-                  addcomment();
-                },
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text('أكتب تعليق'),
-                    SizedBox(width: 5),
-                    Icon(
-                      Icons.message,
-                      color: Color(0xFF31533A),
-                    ),
-                  ],
+                                      Icon(
+                                        Icons.flag,
+                                        color: Color(0xFF31533A),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    })
+                    : Center(child: Text("لا يوجد تعليقات "))
+              ),
+              Container(
+                child: GestureDetector(
+                  onTap: () {
+                    addcomment();
+                  },
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('أكتب تعليق'),
+                      SizedBox(width: 5),
+                      Icon(
+                        Icons.message,
+                        color: Color(0xFF31533A),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
