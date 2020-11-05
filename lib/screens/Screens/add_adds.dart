@@ -328,8 +328,8 @@ class _AddAdsState extends State<AddAds> {
       Dio dio = new Dio();
       var url = "https://dalllal.com/json/addpost";
       dio.options.baseUrl = url;
-      dio.options.connectTimeout = 10000;
-      dio.options.receiveTimeout = 10000;
+      // dio.options.connectTimeout = 10000;
+      // dio.options.receiveTimeout = 10000;
       response = await dio.post(url,
           data: await RegisterData(),
           options: Options(
@@ -337,6 +337,7 @@ class _AddAdsState extends State<AddAds> {
           ));
 
       if (response.statusCode == 200) {
+        Future.delayed(const Duration(milliseconds: 10000));
         final snackBar = SnackBar(
           backgroundColor: Colors.green,
           duration: const Duration(milliseconds: 5000),
@@ -348,6 +349,14 @@ class _AddAdsState extends State<AddAds> {
         _btnController.success();
         _registerscaffoldKey.currentState.showSnackBar(snackBar);
         _btnController.reset();
+
+        setState(() {
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => BottomTabbed()),
+          );
+        });
         //    Navigator.pop(context);
       } else {
         final snackBar = SnackBar(

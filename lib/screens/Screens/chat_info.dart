@@ -38,7 +38,7 @@ class _ChatInfoState extends State<ChatInfo> with AfterLayoutMixin<ChatInfo> {
       final prefs = await SharedPreferences.getInstance();
       // await Future.delayed(Duration(milliseconds: 5000));
 
-      userid = prefs.getInt("User_id");
+      userid = prefs.getInt("User_id")??0;
 
       response = await dio.post("https://dalllal.com/json/updatechat",
           data: {"chat_id": widget.chatId});

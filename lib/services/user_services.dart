@@ -155,8 +155,9 @@ class UserServices {
 
   Future<void> getConversationModel() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+   var userId = prefs.getInt("User_id") ?? 0;
     Response response = await Dio()
-        .get(ApiRoutes.getConversationByUser_id + "${prefs.getInt("User_id")}");
+        .get(ApiRoutes.getConversationByUser_id + "$userId");
     ChatResponse data = new ChatResponse.fromJson(response.data);
     listChat = data.data;
     //  print(ApiRoutes.getConversationByUser_id + "${prefs.getInt("User_id")}");

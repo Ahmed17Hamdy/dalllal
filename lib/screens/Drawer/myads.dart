@@ -81,7 +81,8 @@ class _MyAdsState extends State<MyAds> {
   @override
   void initState() {
     super.initState();
-    _future = this._fetchdata();
+    _fetchdata();
+   // _future = this._fetchdata();
   }
 
   @override
@@ -114,180 +115,143 @@ class _MyAdsState extends State<MyAds> {
                 ),
                 height: height,
                 width: width,
-                child: FutureBuilder(
-                    future: _future,
-                    // ignore: missing_return
-                    builder: (context, snapshot) {
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.none:
-                        case ConnectionState.waiting:
-                        case ConnectionState.active:
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        case ConnectionState.done:
-                          if (snapshot.hasError) {
-                            DioError error = snapshot.error;
-                            String message = error.message;
-                            if (error.type == DioErrorType.CONNECT_TIMEOUT)
-                              message = 'Connection Timeout';
-                            else if (error.type == DioErrorType.RECEIVE_TIMEOUT)
-                              message = 'Receive Timeout';
-                            else if (error.type == DioErrorType.RESPONSE)
-                              message =
-                                  '404 server not found ${error.response.statusCode}';
-
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 50),
-                              child: new ListView(
-                                children: <Widget>[
-                                  Center(
-                                    child: new Text('خطأ في الإتصال بالشبكة '),
+                child: adsList.length != 0
+                    ? ListView.builder(
+                  itemCount: adsList.length,
+                  itemBuilder:
+                      (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 5,
+                          top: 20,
+                          right: 5,
+                          left: 5),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          border: Border.all(
+                              color: mycolor, width: 3),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10.0),
+                          ),
+                          color: Colors.white,
+                        ),
+                        width: width * .7,
+                        height: height * 0.3,
+                        child: Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Expanded(
+                                flex: 4,
+                                child: Container(
+                                  height: height * 0.2,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    border: Border.all(
+                                        color: mycolor,
+                                        width: 1),
+                                    borderRadius:
+                                    BorderRadius.all(
+                                      Radius.circular(10.0),
+                                    ),
+                                    color: Colors.white,
                                   ),
-                                ],
+                                  child: GestureDetector(
+                                    onTap: () =>
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    DetailsScreen(
+                                                      ads: adsList[
+                                                      index],
+                                                    ))),
+                                    child: CachedNetworkImage(
+                                      fadeInCurve:
+                                      Curves.easeInBack,
+                                      fit: BoxFit.cover,
+                                      width: width,
+                                      imageUrl: adsList[index]
+                                          .images[0],
+                                      placeholder: (context,
+                                          url) =>
+                                          CircularProgressIndicator(),
+                                      errorWidget: (context,
+                                          url, error) =>
+                                          Image.asset(
+                                            'images/bc.jpg',
+                                            width: width,
+                                            fit: BoxFit.cover,
+                                          ),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            );
-                          }
-
-                          return adsList.length != 0
-                              ? ListView.builder(
-                                  itemCount: adsList.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: 5,
-                                          top: 20,
-                                          right: 5,
-                                          left: 5),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.rectangle,
-                                          border: Border.all(
-                                              color: mycolor, width: 3),
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0),
-                                          ),
-                                          color: Colors.white,
-                                        ),
-                                        width: width * .7,
-                                        height: height * 0.3,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(5),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Expanded(
-                                                flex: 4,
-                                                child: Container(
-                                                  height: height * 0.2,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.rectangle,
-                                                    border: Border.all(
-                                                        color: mycolor,
-                                                        width: 1),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                      Radius.circular(10.0),
-                                                    ),
-                                                    color: Colors.white,
-                                                  ),
-                                                  child: GestureDetector(
-                                                    onTap: () =>
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (_) =>
-                                                                    DetailsScreen(
-                                                                      ads: adsList[
-                                                                          index],
-                                                                    ))),
-                                                    child: CachedNetworkImage(
-                                                      fadeInCurve:
-                                                          Curves.easeInBack,
-                                                      fit: BoxFit.cover,
-                                                      width: width,
-                                                      imageUrl: adsList[index]
-                                                          .images[0],
-                                                      placeholder: (context,
-                                                              url) =>
-                                                          CircularProgressIndicator(),
-                                                      errorWidget: (context,
-                                                              url, error) =>
-                                                          Image.asset(
-                                                        'images/bc.jpg',
-                                                        width: width,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: <Widget>[
-                                                    Expanded(
-                                                        child: Text(
-                                                            adsList[index]
-                                                                .title!=null?adsList[index]
-                                                                .title:"بلا إسم")),
-                                                    Expanded(
-                                                      child: RatingBar(
-                                                        onRatingUpdate:
-                                                            (value) {},
-                                                        ignoreGestures: true,
-                                                        itemSize: height * 0.03,
-                                                        initialRating:adsList[index]
-                                                            .user
-                                                            .rank!=null?
-                                                            adsList[index]
-                                                                .user
-                                                                .rank
-                                                                .toDouble():0,
-                                                        minRating: 0,
-                                                        direction:
-                                                            Axis.horizontal,
-                                                        allowHalfRating: false,
-                                                        itemCount: 5,
-                                                        itemBuilder:
-                                                            (context, _) =>
-                                                                Icon(
-                                                          Icons.star,
-                                                          size: 1,
-                                                          color: mycolor,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
+                              Expanded(
+                                flex: 1,
+                                child: Row(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                  MainAxisAlignment
+                                      .spaceBetween,
+                                  children: <Widget>[
+                                    Expanded(
+                                        child: Text(
+                                            adsList[index]
+                                                .title!=null?adsList[index]
+                                                .title:"بلا إسم")),
+                                    Expanded(
+                                      child: RatingBar(
+                                        onRatingUpdate:
+                                            (value) {},
+                                        ignoreGestures: true,
+                                        itemSize: height * 0.03,
+                                        initialRating:adsList[index]
+                                            .user
+                                            .rank!=null?
+                                        adsList[index]
+                                            .user
+                                            .rank
+                                            .toDouble():0,
+                                        minRating: 0,
+                                        direction:
+                                        Axis.horizontal,
+                                        allowHalfRating: false,
+                                        itemCount: 5,
+                                        itemBuilder:
+                                            (context, _) =>
+                                            Icon(
+                                              Icons.star,
+                                              size: 1,
+                                              color: mycolor,
+                                            ),
                                       ),
-                                    );
-                                  },
-                                )
-                              : Padding(
-                                  padding: const EdgeInsets.only(top: 50),
-                                  child: new ListView(
-                                    children: <Widget>[
-                                      Center(
-                                        child:
-                                            new Text('لا توجد إعلانات سابقة '),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                      }
-                    }),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                )
+                    : Padding(
+                  padding: const EdgeInsets.only(top: 50),
+                  child: new ListView(
+                    children: <Widget>[
+                      Center(
+                        child:
+                        new Text('لا توجد إعلانات سابقة '),
+                      ),
+                    ],
+                  ),
+                )
               ),
             ],
           ),

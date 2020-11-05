@@ -53,13 +53,13 @@ class _FavouritesState extends State<Favourites> {
   Future<void> _fetchdata() async {
     var result = await Connectivity().checkConnectivity();
     final prefs = await SharedPreferences.getInstance();
-    userid = prefs.getInt("User_id");
+    userid = prefs.getInt("User_id")??0;
     if (userid != 0) {
       if (result != ConnectivityResult.none) {
         Response response;
         Dio dio = new Dio();
         response = await dio.post("https://dalllal.com/json/myfavourites",
-            data: {"user_id": 285});
+            data: {"user_id": userid});
         if (response.statusCode == 200) {
           FavouriteResponse data =
               new FavouriteResponse.fromJson(response.data);
