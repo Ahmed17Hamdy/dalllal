@@ -12,7 +12,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants.dart';
-import '../../constants.dart';
 
 class Favourites extends StatefulWidget {
   @override
@@ -53,7 +52,7 @@ class _FavouritesState extends State<Favourites> {
   Future<void> _fetchdata() async {
     var result = await Connectivity().checkConnectivity();
     final prefs = await SharedPreferences.getInstance();
-    userid = prefs.getInt("User_id")??0;
+    userid = prefs.getInt("User_id") ?? 0;
     if (userid != 0) {
       if (result != ConnectivityResult.none) {
         Response response;

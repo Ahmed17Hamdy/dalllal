@@ -553,7 +553,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             Navigator.pop(context);
                           });
                         },
-
                       ),
                     ),
                   ],
@@ -1218,7 +1217,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ),
                 SizedBox(height: 10),
                 Container(
-                  height: height * .4,
                   child: Stack(
                     alignment: Alignment.topCenter,
                     children: <Widget>[
@@ -1236,7 +1234,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 ),
                                 color: Colors.white,
                               ),
-                              height: height * 0.4,
                               child: SingleChildScrollView(
                                 child: Column(
                                   mainAxisAlignment:
@@ -1322,7 +1319,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                     style: kDetailedTextStyle,
                                                   ),
                                                   Text(
-                                                    widget.ads.cityName!=null?widget.ads.cityName:"بلا مدينة",
+                                                    widget.ads.cityName != null
+                                                        ? widget.ads.cityName
+                                                        : "بلا مدينة",
                                                     style: kDetailETextStyle,
                                                   ),
                                                 ],
@@ -1754,7 +1753,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                               ),
                                                                               SizedBox(width: 5),
                                                                               Text(
-                                                                                commentlist[index].userName!=null?commentlist[index].userName:"بال إسم",
+                                                                                commentlist[index].userName != null ? commentlist[index].userName : "بال إسم",
                                                                                 style: kTextStyle,
                                                                               ),
                                                                             ],
@@ -1770,7 +1769,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                                 width: 5,
                                                                               ),
                                                                               Text(
-                                                                                commentlist[index].timeAgo!=null?commentlist[index].timeAgo:"",
+                                                                                commentlist[index].timeAgo != null ? commentlist[index].timeAgo : "",
                                                                                 style: kTextStyle,
                                                                               ),
                                                                             ],
@@ -1786,7 +1785,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                             Wrap(
                                                                           children: <
                                                                               Widget>[
-                                                                            Text(widget.ads.comments[index].body!=null?widget.ads.comments[index].body:""),
+                                                                            Text(widget.ads.comments[index].body != null
+                                                                                ? widget.ads.comments[index].body
+                                                                                : ""),
                                                                           ],
                                                                         ),
                                                                       ),
@@ -2114,8 +2115,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                     children: <
                                                                         Widget>[
                                                                       Expanded(
-                                                                          child:
-                                                                              Text(similaradsList[index].title!=null?similaradsList[index].title:"بلا إسم")),
+                                                                          child: Text(similaradsList[index].title != null
+                                                                              ? similaradsList[index].title
+                                                                              : "بلا إسم")),
                                                                       Expanded(
                                                                         child:
                                                                             RatingBar(
@@ -2123,12 +2125,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                               true,
                                                                           itemSize:
                                                                               height * 0.03,
-                                                                          initialRating:similaradsList[index]
-                                                                              .user
-                                                                              .rank!=null? similaradsList[index]
-                                                                              .user
-                                                                              .rank
-                                                                              .toDouble():0,
+                                                                          initialRating: similaradsList[index].user.rank != null
+                                                                              ? similaradsList[index].user.rank.toDouble()
+                                                                              : 0,
                                                                           minRating:
                                                                               0,
                                                                           direction:
@@ -2372,7 +2371,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                             similaradsListforcity[index].images[0],
                                                                         placeholder:
                                                                             (context, url) =>
-                                                                                CircularProgressIndicator(),
+                                                                                Center(child: CircularProgressIndicator()),
                                                                         errorWidget: (context,
                                                                                 url,
                                                                                 error) =>
@@ -2399,8 +2398,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                     children: <
                                                                         Widget>[
                                                                       Expanded(
-                                                                          child:
-                                                                              Text(similaradsListforcity[index].title!=null?similaradsListforcity[index].title:"بلا إسم")),
+                                                                          child: Text(similaradsListforcity[index].title != null
+                                                                              ? similaradsListforcity[index].title
+                                                                              : "بلا إسم")),
                                                                       Expanded(
                                                                         child:
                                                                             RatingBar(
@@ -2408,12 +2408,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                                               true,
                                                                           itemSize:
                                                                               height * 0.03,
-                                                                          initialRating:similaradsListforcity[index]
-                                                                              .user
-                                                                              .rank!=null? similaradsListforcity[index]
-                                                                              .user
-                                                                              .rank
-                                                                              .toDouble():0,
+                                                                          initialRating: similaradsListforcity[index].user.rank != null
+                                                                              ? similaradsListforcity[index].user.rank.toDouble()
+                                                                              : 0,
                                                                           minRating:
                                                                               0,
                                                                           direction:
