@@ -421,7 +421,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
     }
   }
 
-  void addcomment() {
+  void addcomment()async {
+    final prefs = await SharedPreferences.getInstance();
+    userid = prefs.getInt("User_id");
     if (userid != 0 && userid != null) {
       AwesomeDialog(
         context: context,
@@ -433,156 +435,168 @@ class _DetailsScreenState extends State<DetailsScreen> {
         dialogType: DialogType.INFO,
         body: StatefulBuilder(
             builder: (BuildContext context, StateSetter _setState) {
-          bool _isButtonEnabled;
-          if ((body.text != "") && (body != null)) {
-            _isButtonEnabled = true;
-          } else {
-            _isButtonEnabled = false;
-          }
-
-          var _onPressed;
-          if (_isButtonEnabled) {
-            _onPressed = () async {
-              var result = await Connectivity().checkConnectivity();
-              if (result != ConnectivityResult.none) {
-                FormData formData = new FormData.fromMap({
-                  "post_id": widget.ads.id,
-                  "user_id": userid,
-                  "body": _body,
-                });
-                Response response = await Dio().post(
-                  "https://dalllal.com/json/addcomment",
-                  data: formData,
-                );
-                if (response.statusCode == 200) {
-                  addreport data = new addreport.fromJson(response.data);
-
-                  final snackBar = SnackBar(
-                    backgroundColor: Colors.green,
-                    duration: const Duration(milliseconds: 5),
-                    content: Text(
-                      'تم إضافة التعليق',
-                      style: ksnackStyle,
-                    ),
-                  );
-
-                  // Find the Scaffold in the widget tree and use it to show a SnackBar.
-                  _scaffoldKey.currentState.showSnackBar(snackBar);
-                  _btnController.success();
-                }
+              bool _isButtonEnabled;
+              if ((body.text != "") && (body != null)) {
+                _isButtonEnabled = true;
               } else {
-                final snackBar = SnackBar(
-                  backgroundColor: Colors.red,
-                  duration: const Duration(milliseconds: 5),
-                  content: Text(
-                    'خطأ في الإتصال بالشبكة , من فضلك تحقق من إتصالك بالإنترنت',
-                    style: ksnackStyle,
-                  ),
-                );
-
-                // Find the Scaffold in the widget tree and use it to show a SnackBar.
-                _scaffoldKey.currentState.showSnackBar(snackBar);
-                _btnController.reset();
+                _isButtonEnabled = false;
               }
-            };
-          }
-          return Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.fromLTRB(30, 20, 30, 0),
-                child: TextFormField(
-                  maxLines: 5,
-                  controller: body,
-                  onChanged: ((String newval) {
-                    _setState(() {
-                      _body = newval;
-                      if ((body.text != "") && (body != null)) {
-                        _isButtonEnabled = true;
-                      } else {
-                        _isButtonEnabled = false;
-                      }
-                      //    isEmpty();
-                    });
-                  }),
-                  // onFieldSubmitted: (v) {
-                  //   FocusScope.of(context).requestFocus(focus);
-                  // },
 
-                  style: TextStyle(color: kMyColor),
-                  autofocus: false,
-                  decoration: kTextFeild.copyWith(labelText: 'الموضوع'),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: RoundedLoadingButton(
-                        width: width * 0.5,
-                        animateOnTap: true,
-                        color: kButtonColor,
-                        child: Container(
-                          child: Text(
-                            'إرسال',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white),
+              var _onPressed;
+              if (_isButtonEnabled) {
+                _onPressed = () async {
+                  var result = await Connectivity().checkConnectivity();
+                  if (result != ConnectivityResult.none) {
+                    FormData formData = new FormData.fromMap({
+                      "post_id": widget.ads.id,
+                      "user_id": userid,
+                      "body": _body,
+                    });
+                    Response response = await Dio().post(
+                      "https://dalllal.com/json/addcomment",
+                      data: formData,
+                    );
+                    if (response.statusCode == 200) {
+                      addreport data = new addreport.fromJson(response.data);
+                      Response response1;
+                      Dio dio = new Dio();
+
+                      response1 = await dio.post("https://dalllal.com/json/showpost",
+                          data: {"post_id": widget.ads.id, "user_id": userid});
+
+                      Showpost data1 = new Showpost.fromJson(response1.data);
+                      setState(() {
+                        comments = data1.data[0].post.cmnt;
+                        commentlist = comments;
+                      });
+                      final snackBar = SnackBar(
+                        backgroundColor: Colors.green,
+                        duration: const Duration(milliseconds: 5),
+                        content: Text(
+                          'تم إضافة التعليق',
+                          style: ksnackStyle,
+                        ),
+                      );
+
+                      // Find the Scaffold in the widget tree and use it to show a SnackBar.
+                      _scaffoldKey.currentState.showSnackBar(snackBar);
+                      _btnController.success();
+                      Navigator.pop(context);
+                    }
+                  } else {
+                    final snackBar = SnackBar(
+                      backgroundColor: Colors.red,
+                      duration: const Duration(milliseconds: 5),
+                      content: Text(
+                        'خطأ في الإتصال بالشبكة , من فضلك تحقق من إتصالك بالإنترنت',
+                        style: ksnackStyle,
+                      ),
+                    );
+
+                    // Find the Scaffold in the widget tree and use it to show a SnackBar.
+                    _scaffoldKey.currentState.showSnackBar(snackBar);
+                    _btnController.reset();
+                  }
+                };
+              }
+              return Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(30, 20, 30, 0),
+                    child: TextFormField(
+                      maxLines: 5,
+                      controller: body,
+                      onChanged: ((String newval) {
+                        _setState(() {
+                          _body = newval;
+                          if ((body.text != "") && (body != null)) {
+                            _isButtonEnabled = true;
+                          } else {
+                            _isButtonEnabled = false;
+                          }
+                          //    isEmpty();
+                        });
+                      }),
+                      // onFieldSubmitted: (v) {
+                      //   FocusScope.of(context).requestFocus(focus);
+                      // },
+
+                      style: TextStyle(color: kMyColor),
+                      autofocus: false,
+                      decoration: kTextFeild.copyWith(labelText: 'الموضوع'),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: RoundedLoadingButton(
+                            width: width * 0.5,
+                            animateOnTap: true,
+                            color: kButtonColor,
+                            child: Container(
+                              child: Text(
+                                'إرسال',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            onPressed: _onPressed,
+                            controller: _btnController,
                           ),
                         ),
-                        onPressed: _onPressed,
-                        controller: _btnController,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                      child: RoundedLoadingButton(
-                        width: width * 0.5,
-                        animateOnTap: true,
-                        color: Colors.red,
-                        child: Container(
-                          child: Text(
-                            'إلغاء',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Expanded(
+                          child: RoundedLoadingButton(
+                            width: width * 0.5,
+                            animateOnTap: true,
+                            color: Colors.red,
+                            child: Container(
+                              child: Text(
+                                'إلغاء',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                Navigator.pop(context);
+                              });
+                            },
+
                           ),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            Navigator.pop(context);
-                          });
-                        },
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ],
-          );
-        }),
+                  ),
+                ],
+              );
+            }),
       )..show();
     } else {
       AwesomeDialog(
-              aligment: Alignment.center,
-              dismissOnTouchOutside: false,
-              context: context,
-              btnCancelText: "نعم",
-              btnCancelColor: Colors.green,
-              btnOkText: "لا",
-              btnOkColor: Colors.red,
-              headerAnimationLoop: false,
-              dialogType: DialogType.WARNING,
-              animType: AnimType.BOTTOMSLIDE,
-              tittle: 'هذه الخاصية بحاجة لتسجيل الدخول ',
-              desc: ' هل تريد تسجيل الدخول ؟ ',
-              btnCancelOnPress: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                );
-              },
-              btnOkOnPress: () {})
+          aligment: Alignment.center,
+          dismissOnTouchOutside: false,
+          context: context,
+          btnCancelText: "نعم",
+          btnCancelColor: Colors.green,
+          btnOkText: "لا",
+          btnOkColor: Colors.red,
+          headerAnimationLoop: false,
+          dialogType: DialogType.WARNING,
+          animType: AnimType.BOTTOMSLIDE,
+          tittle: 'هذه الخاصية بحاجة لتسجيل الدخول ',
+          desc: ' هل تريد تسجيل الدخول ؟ ',
+          btnCancelOnPress: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
+          },
+          btnOkOnPress: () {})
           .show();
     }
   }
@@ -1514,10 +1528,135 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   childCount: widget.ads.images.length,
                 ),
               ),
+              SliverFixedExtentList(
+                itemExtent: height * .3,
+                delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      margin: EdgeInsets.fromLTRB(20, 0, 20, 5),
+
+                      child:Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                            width: width,
+                            height: height * 0.8,
+                            child:  commentlist.length != 0
+                                ? ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                itemCount: commentlist.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, right: 5, left: 5),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        border: Border.all(
+                                            color: mycolor, width: 3),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0),
+                                        ),
+                                        color: Colors.white,
+                                      ),
+                                      height: height * .2,
+                                      child: SingleChildScrollView(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(5),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceBetween,
+                                                children: <Widget>[
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Icon(
+                                                        FontAwesomeIcons.userAlt,
+                                                        color: Color(0xFF31533A),
+                                                        size: 15,
+                                                      ),
+                                                      SizedBox(width: 5),
+                                                      Text(
+                                                        commentlist[index]
+                                                            .userName!=null?commentlist[index]
+                                                            .userName:"بلا إسم",
+                                                        style: kTextStyle,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Icon(
+                                                        FontAwesomeIcons.clock,
+                                                        color: Color(0xFF31533A),
+                                                        size: 12,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Text(
+                                                        commentlist[index]
+                                                            .timeAgo!=null?commentlist[index]
+                                                            .timeAgo:"",
+                                                        style: kTextStyle,
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+
+                                              Row(
+
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween
+                                                ,
+                                                children: <Widget>[
+                                                  SingleChildScrollView(
+                                                    child: Wrap(
+                                                      children: <Widget>[
+                                                        Text(commentlist[index].body!=null?commentlist[index].body:""),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Icon(
+                                                    Icons.flag,
+                                                    color: Color(0xFF31533A),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                })
+                                : Container(child: Center(child: Text("لا يوجد تعليقات ")))
+                        ),
+                      ),
+                    );
+                  },
+                  childCount: commentlist.length+1,
+                ),
+              ),
               SliverToBoxAdapter(
                 child: Container(
                   padding: EdgeInsets.all(5),
-                  margin: EdgeInsets.symmetric(vertical: 5),
+                  margin: EdgeInsets.fromLTRB(20, 0, 20, 5),
                   decoration: BoxDecoration(
                     color: mycolor,
                     borderRadius: BorderRadius.circular(5),
@@ -1544,123 +1683,357 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
                 ),
               ),
-
               SliverFixedExtentList(
-                itemExtent: height * .1,
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return Container(
-                      color: Colors.white,
-                      child: FutureBuilder(
-                        future: _future,
-                        builder: (context, snapshot) {
-                          switch (snapshot.connectionState) {
-                            case ConnectionState.none:
-                            case ConnectionState.waiting:
-                            case ConnectionState.active:
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            case ConnectionState.done:
-                              if (snapshot.hasError) {
-                                DioError error = snapshot.error;
-                                String message = error.message;
-                                if (error.type == DioErrorType.CONNECT_TIMEOUT)
-                                  message = 'Connection Timeout';
-                                else if (error.type ==
-                                    DioErrorType.RECEIVE_TIMEOUT)
-                                  message = 'Receive Timeout';
-                                else if (error.type == DioErrorType.RESPONSE)
-                                  message =
-                                      '404 server not found ${error.response.statusCode}';
-                                return Padding(
-                                  padding: const EdgeInsets.only(top: 50),
-                                  child: RefreshIndicator(
-                                      child: new ListView(
-                                        children: <Widget>[
-                                          Center(
-                                            child: new Text(
-                                                'خطأ في الإتصال بالشبكة '),
-                                          ),
-                                        ],
-                                      ),
-                                      onRefresh: () {
-                                        return _future = _refresh();
-                                      }),
-                                );
-                              }
-                              Response response = snapshot.data;
-                              Showpost data =
-                                  new Showpost.fromJson(response.data);
-                              commentlist = data.data[0].post.cmnt;
-                              return RefreshIndicator(
-                                onRefresh: () {
-                                  return _fetchdata();
-                                },
-                                child: commentlist.length != 0
-                                    ? Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        color: mycolor,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Expanded(
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.stretch,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    commentlist[index]
-                                                                .userName !=
-                                                            null
-                                                        ? commentlist[index]
-                                                            .userName
-                                                        : "بال إسم",
+                delegate: SliverChildListDelegate(
+                  [
+                    // Container(
+                    //   padding: EdgeInsets.all(5),
+                    //   margin: EdgeInsets.symmetric(vertical: 10),
+                    //   decoration: BoxDecoration(
+                    //     color: mycolor,
+                    //     borderRadius: BorderRadius.circular(5),
+                    //   ),
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       Expanded(
+                    //         flex: 2,
+                    //         child: Text(
+                    //           widget.ads.title != null
+                    //               ? widget.ads.title
+                    //               : "بلا إسم",
+                    //           style: Theme.of(context).textTheme.bodyText1,
+                    //         ),
+                    //       ),
+                    //       Expanded(
+                    //         child: Text(
+                    //           widget.ads.timeAgo != null
+                    //               ? widget.ads.timeAgo
+                    //               : "",
+                    //           style: Theme.of(context).textTheme.bodyText2,
+                    //         ),
+                    //       ),
+                    //       Expanded(
+                    //         flex: 2,
+                    //         child: Row(
+                    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //           children: [
+                    //             Expanded(
+                    //               flex: 2,
+                    //               child: ListTile(
+                    //                 leading: Icon(Icons.person),
+                    //                 title: Text(
+                    //                   widget.ads.userName,
+                    //                   style:
+                    //                       Theme.of(context).textTheme.bodyText2,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //             Expanded(
+                    //               child: ListTile(
+                    //                 leading: Icon(Icons.location_city),
+                    //                 title: Text(
+                    //                   widget.ads.area.name,
+                    //                   style:
+                    //                       Theme.of(context).textTheme.bodyText2,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+
+                    Padding(
+                      padding: EdgeInsets.only(top:5),
+                      child:   Container(
+                  height: height * .3,
+                  width: double.infinity,
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+                        child: Stack(
+                          alignment: Alignment.topCenter,
+                          children: <Widget>[
+                            Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  border: Border.all(color: mycolor, width: 3),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10.0),
+                                  ),
+                                  color: Colors.white,
+                                ),
+                                height: height * 0.4,
+                                child: FutureBuilder(
+                                    future: _future,
+                                    builder: (context, snapshot) {
+                                      switch (snapshot.connectionState) {
+                                        case ConnectionState.none:
+                                        case ConnectionState.waiting:
+                                        case ConnectionState.active:
+                                          return Center(
+                                            // ignore: missing_return
+                                            child: CircularProgressIndicator(),
+                                          );
+                                        case ConnectionState.done:
+                                          if (snapshot.hasError) {
+                                            // ignore: missing_return
+                                            DioError error = snapshot.error;
+                                            String message = error.message;
+                                            if (error.type ==
+                                                DioErrorType.CONNECT_TIMEOUT)
+                                              message = 'Connection Timeout';
+                                            else if (error.type ==
+                                                DioErrorType.RECEIVE_TIMEOUT)
+                                              message = 'Receive Timeout';
+                                            else if (error.type ==
+                                                DioErrorType.RESPONSE)
+                                              message =
+                                                  '404 server not found ${error.response.statusCode}';
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 50),
+                                              child: RefreshIndicator(
+                                                  child: new ListView(
+                                                    children: <Widget>[
+                                                      Center(
+                                                        child: new Text(
+                                                            'خطأ في الإتصال بالشبكة '),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  Text(
-                                                    commentlist[index]
-                                                                .timeAgo !=
-                                                            null
-                                                        ? commentlist[index]
-                                                            .timeAgo
-                                                        : "",
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Flexible(
-                                              child: Text(
-                                                widget.ads.comments[index]
-                                                            .body !=
-                                                        null
-                                                    ? widget.ads.comments[index]
-                                                        .body
-                                                    : "",
-                                                style: TextStyle(fontSize: 12),
-                                                maxLines: 2,
-                                              ),
-                                            ),
-                                            Divider(
-                                              color: Colors.brown,
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    : Center(child: Text("لا يوجد تعليقات ")),
-                              );
-                          }
-                        },
+                                                  onRefresh: () {
+                                                    return _future = _refresh();
+                                                  }),
+                                            );
+                                          }
+                                          Response response = snapshot.data;
+                                          Showpost data = new Showpost.fromJson(
+                                              response.data);
+                                          similaradsList =
+                                              data.data[0].similarPosts;
+                                          for (var item in similaradsList) {
+                                            if (item.title == null) {
+                                              item.title = "بلا عنوان";
+                                            }
+                                            if (item.body == null) {
+                                              item.body = "بلا تفاصيل";
+                                            }
+                                            if (item.images.length == 0) {
+                                              item.images.insert(
+                                                  0,
+                                                  AssetImage('images/bc.jpg')
+                                                      .toString());
+                                            }
+                                            if (item.user.rank == null) {
+                                              item.user.rank = 0;
+                                            }
+                                            if (item.price == null ||
+                                                item.price == "") {
+                                              item.price = "غير محدد";
+                                            }
+                                          }
+                                          return RefreshIndicator(
+                                            onRefresh: () {
+                                              return _fetchdata();
+                                            },
+                                            child: similaradsList.length != 0
+                                                ? ListView.builder(
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    itemCount:
+                                                        similaradsList.length,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                bottom: 5,
+                                                                top: 20,
+                                                                right: 5,
+                                                                left: 5),
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape: BoxShape
+                                                                .rectangle,
+                                                            border: Border.all(
+                                                                color: mycolor,
+                                                                width: 3),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(
+                                                              Radius.circular(
+                                                                  10.0),
+                                                            ),
+                                                            color: Colors.white,
+                                                          ),
+                                                          width: width * .7,
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(5),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: <
+                                                                  Widget>[
+                                                                Expanded(
+                                                                  flex: 4,
+                                                                  child:
+                                                                      Container(
+                                                                    height:
+                                                                        height *
+                                                                            0.2,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      shape: BoxShape
+                                                                          .rectangle,
+                                                                      border: Border.all(
+                                                                          color:
+                                                                              mycolor,
+                                                                          width:
+                                                                              1),
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .all(
+                                                                        Radius.circular(
+                                                                            10.0),
+                                                                      ),
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                    child:
+                                                                        GestureDetector(
+                                                                      onTap: () => Navigator.push(
+                                                                          context,
+                                                                          MaterialPageRoute(
+                                                                              builder: (_) => DetailsScreen(
+                                                                                    ads: similaradsList[index],
+                                                                                  ))),
+                                                                      child:
+                                                                          CachedNetworkImage(
+                                                                        fadeInCurve:
+                                                                            Curves.easeInBack,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                        width:
+                                                                            width,
+                                                                        imageUrl:
+                                                                            similaradsList[index].images[0],
+                                                                        placeholder:
+                                                                            (context, url) =>
+                                                                                CircularProgressIndicator(),
+                                                                        errorWidget: (context,
+                                                                                url,
+                                                                                error) =>
+                                                                            Image.asset(
+                                                                          'images/bc.jpg',
+                                                                          width:
+                                                                              width,
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Expanded(
+                                                                  flex: 1,
+                                                                  child: Row(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: <
+                                                                        Widget>[
+                                                                      Expanded(
+                                                                          child: Text(similaradsList[index].title != null
+                                                                              ? similaradsList[index].title
+                                                                              : "بلا إسم")),
+                                                                      Expanded(
+                                                                        child:
+                                                                            RatingBar(
+                                                                          ignoreGestures:
+                                                                              true,
+                                                                          itemSize:
+                                                                              height * 0.03,
+                                                                          initialRating: similaradsList[index].user.rank != null
+                                                                              ? similaradsList[index].user.rank.toDouble()
+                                                                              : 0,
+                                                                          minRating:
+                                                                              0,
+                                                                          direction:
+                                                                              Axis.horizontal,
+                                                                          allowHalfRating:
+                                                                              false,
+                                                                          itemCount:
+                                                                              5,
+                                                                          itemBuilder: (context, _) =>
+                                                                              Icon(
+                                                                            Icons.star,
+                                                                            size:
+                                                                                1,
+                                                                            color:
+                                                                                mycolor,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  )
+                                                : Center(
+                                                    child: Text(
+                                                        "لا يوجد إعلانات مشابهة ")),
+                                          );
+                                      }
+                                    })),
+                          ],
+                        ),
                       ),
-                    );
-                  },
-                  childCount: commentlist.length,
+                      Container(
+                        margin: EdgeInsets.only(left: 50, right: 50),
+                        height: height * .05,
+                        width: width,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            border: Border.all(color: mycolor, width: 3),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(30.0),
+                            ),
+                            color: mycolor),
+                        child: Center(
+                            child: Text(
+                          'الإعلانات المشابهة',
+                          style: kSizetStyle,
+                        )),
+                      ),
+                    ],
+                  ),
                 ),
+                    ),
+                  ],
+                ),
+                itemExtent: height * .4,
               ),
+
               // SliverToBoxAdapter(
               //   child: Container(
               //     height: height * .5,
