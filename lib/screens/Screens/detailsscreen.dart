@@ -946,164 +946,569 @@ class _DetailsScreenState extends State<DetailsScreen> {
               SliverFixedExtentList(
                 delegate: SliverChildListDelegate(
                   [
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      decoration: BoxDecoration(
-                        color: mycolor,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Text(
-                              widget.ads.title != null
-                                  ? widget.ads.title
-                                  : "بلا إسم",
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                          ),
-                          Expanded(
-                            child: Text(
-                              widget.ads.timeAgo != null
-                                  ? widget.ads.timeAgo
-                                  : "",
-                              style: Theme.of(context).textTheme.bodyText2,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: ListTile(
-                                    leading: Icon(Icons.person),
-                                    title: Text(
-                                      widget.ads.userName,
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2,
-                                    ),
+                    // Container(
+                    //   padding: EdgeInsets.all(5),
+                    //   margin: EdgeInsets.symmetric(vertical: 10),
+                    //   decoration: BoxDecoration(
+                    //     color: mycolor,
+                    //     borderRadius: BorderRadius.circular(5),
+                    //   ),
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       Expanded(
+                    //         flex: 2,
+                    //         child: Text(
+                    //           widget.ads.title != null
+                    //               ? widget.ads.title
+                    //               : "بلا إسم",
+                    //           style: Theme.of(context).textTheme.bodyText1,
+                    //         ),
+                    //       ),
+                    //       Expanded(
+                    //         child: Text(
+                    //           widget.ads.timeAgo != null
+                    //               ? widget.ads.timeAgo
+                    //               : "",
+                    //           style: Theme.of(context).textTheme.bodyText2,
+                    //         ),
+                    //       ),
+                    //       Expanded(
+                    //         flex: 2,
+                    //         child: Row(
+                    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //           children: [
+                    //             Expanded(
+                    //               flex: 2,
+                    //               child: ListTile(
+                    //                 leading: Icon(Icons.person),
+                    //                 title: Text(
+                    //                   widget.ads.userName,
+                    //                   style:
+                    //                       Theme.of(context).textTheme.bodyText2,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //             Expanded(
+                    //               child: ListTile(
+                    //                 leading: Icon(Icons.location_city),
+                    //                 title: Text(
+                    //                   widget.ads.area.name,
+                    //                   style:
+                    //                       Theme.of(context).textTheme.bodyText2,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+
+                Padding(
+                  padding: EdgeInsets.only(top:5),
+                  child: Container(
+                    height: height * .7,
+                    child: Stack(
+                      alignment: Alignment.topCenter,
+                      children: <Widget>[
+                        Stack(
+                          alignment: Alignment.topCenter,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+                              child: Container(
+                                height: height * 0.3,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  border: Border.all(color: mycolor, width: 3),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10.0),
+                                  ),
+                                  color: Colors.white,
+                                ),
+                                child: Padding(
+                                  padding: const  EdgeInsets.fromLTRB(20, 30, 20, 5),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          UserDetails(
+                                                            user: widget.ads.user,
+                                                          )),
+                                                );
+                                              });
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 2, left: 2),
+                                              child: CircleAvatar(
+                                                radius: 41,
+                                                backgroundColor: mycolor,
+                                                child: CircleAvatar(
+                                                  backgroundImage: widget
+                                                              .ads.user.image ==
+                                                          null
+                                                      ? AssetImage(
+                                                          'images/user.png')
+                                                      : NetworkImage(
+                                                          "https://dalllal.com/dashboard_files/usersimages/" +
+                                                              widget
+                                                                  .ads.user.image),
+                                                  backgroundColor: Colors.white,
+                                                  foregroundColor: Colors.white,
+                                                  radius: 40,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: <Widget>[
+                                              Text(
+                                                widget.ads.userName,
+                                                style: TextStyle(color: mycolor),
+                                              ),
+                                              Text(
+                                                widget.ads.area.name,
+                                                style: TextStyle(color: mycolor),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          Row(
+                                            children: <Widget>[
+                                              Text(
+                                                "التقييم",
+                                                style: TextStyle(color: mycolor),
+                                              ),
+                                              RatingBar(
+                                                ignoreGestures: true,
+                                                itemSize: height * 0.02,
+                                                initialRating:
+                                                    widget.ads.user.evaluation !=
+                                                            null
+                                                        ? widget.ads.user.evaluation
+                                                            .toDouble()
+                                                        : 0,
+                                                minRating: 0,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: false,
+                                                itemCount: 5,
+                                                itemBuilder: (context, _) => Icon(
+                                                  Icons.star,
+                                                  size: 1,
+                                                  color: mycolor,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          GestureDetector(
+                                            onTap: () async {
+//                                          setState(() async {
+                                              final prefs = await SharedPreferences
+                                                  .getInstance();
+                                              await prefs.setString("ownerEmail",
+                                                  widget.ads.user.email);
+                                              await prefs.setString("ownername",
+                                                  widget.ads.user.name);
+                                              if (userid != 0) {
+                                                print(
+                                                    widget.ads.user.id.toString());
+                                                await UserServices().addNewMSG(
+                                                    prefs
+                                                        .getInt("User_id")
+                                                        .toString(),
+                                                    widget.ads.user.id.toString(),
+                                                    "مرحبا");
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) => Chat(
+                                                          () {},
+                                                          isHasBar: true)),
+                                                );
+                                              } else {
+                                                AwesomeDialog(
+                                                        aligment: Alignment.center,
+                                                        dismissOnTouchOutside:
+                                                            false,
+                                                        context: context,
+                                                        btnCancelText: "نعم",
+                                                        btnCancelColor:
+                                                            Colors.green,
+                                                        btnOkText: "لا",
+                                                        btnOkColor: Colors.red,
+                                                        headerAnimationLoop: false,
+                                                        dialogType:
+                                                            DialogType.WARNING,
+                                                        animType:
+                                                            AnimType.BOTTOMSLIDE,
+                                                        tittle:
+                                                            'هذه الخاصية بحاجة لتسجيل الدخول ',
+                                                        desc:
+                                                            ' هل تريد تسجيل الدخول ؟ ',
+                                                        btnCancelOnPress: () {
+                                                          Navigator.pushReplacement(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (context) =>
+                                                                    LoginPage()),
+                                                          );
+                                                        },
+                                                        btnOkOnPress: () {})
+                                                    .show();
+                                              }
+                                            },
+                                            child: Row(
+                                              children: <Widget>[
+                                                Text(
+                                                  "مراسلة",
+                                                  style: TextStyle(color: mycolor),
+                                                ),
+                                                Icon(
+                                                  Icons.chat,
+                                                  color: mycolor,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Expanded(
-                                  child: ListTile(
-                                    leading: Icon(Icons.location_city),
-                                    title: Text(
-                                      widget.ads.area.name,
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 50, right: 50),
+                          height: height * .05,
+                          width: width,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              border: Border.all(color: mycolor, width: 3),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(30.0),
+                              ),
+                              color: mycolor),
+                          child: Center(
+                              child: Text(
+                            'معلومات صاحب الإعلان',
+                            style: kSizetStyle,
+                          )),
+                        ),
+                      ],
                     ),
+                  ),
+                ),
                   ],
                 ),
-                itemExtent: height * .15,
+                itemExtent: height * .2,
               ),
               SliverToBoxAdapter(
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  margin: EdgeInsets.symmetric(vertical: 5),
-                  decoration: BoxDecoration(
-                    color: mycolor,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Wrap(
-                        children: <Widget>[
-                          Text(
-                            "الإسم : ",
-                            style: kDetailedTextStyle,
-                          ),
-                          Text(
-                            widget.ads.title != null
-                                ? widget.ads.title
-                                : "بلا إسم",
-                            style: kDetailETextStyle,
-                          ),
-                        ],
-                      ),
-                      Text(
-                        widget.ads.body != null ? widget.ads.body : "",
-                        overflow: TextOverflow.visible,
-                        maxLines: 10,
-                        softWrap: true,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Wrap(
-                              children: <Widget>[
-                                Text('السعر : '),
-                                Text(
-                                  widget.ads.price != null
-                                      ? widget.ads.price
-                                      : "غير محدد",
+                  child:Container(
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+                        child: Stack(
+                          alignment: Alignment.topCenter,
+                          children: <Widget>[
+                            Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                border: Border.all(color: mycolor, width: 3),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0),
                                 ),
-                              ],
+                                color: Colors.white,
+                              ),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 20, right: 8),
+                                      child: SingleChildScrollView(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Expanded(
+                                              flex: 1,
+                                              child: Wrap(
+                                                children: <Widget>[
+                                                  Text(
+                                                    "الإسم : ",
+                                                    style: kDetailedTextStyle,
+                                                  ),
+                                                  Text(
+                                                    widget.ads.title != null
+                                                        ? widget.ads.title
+                                                        : "بلا إسم",
+                                                    style: kDetailETextStyle,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Wrap(
+                                                children: <Widget>[
+                                                  Text(
+                                                    "التاريخ  : ",
+                                                    style: kDetailedTextStyle,
+                                                  ),
+                                                  Text(
+                                                      widget.ads.timeAgo != null
+                                                          ? widget.ads.timeAgo
+                                                          : "",
+                                                      style: kDetailETextStyle),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 8),
+                                      child: SingleChildScrollView(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Expanded(
+                                              flex: 1,
+                                              child: Wrap(
+                                                children: <Widget>[
+                                                  Text('السعر : ',
+                                                      style:
+                                                          kDetailedTextStyle),
+                                                  Text(
+                                                    widget.ads.price != null
+                                                        ? widget.ads.price
+                                                        : "غير محدد",
+                                                    style: kDetailETextStyle,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Wrap(
+                                                children: <Widget>[
+                                                  Text(
+                                                    "المدينة : ",
+                                                    style: kDetailedTextStyle,
+                                                  ),
+                                                  Text(
+                                                    widget.ads.cityName != null
+                                                        ? widget.ads.cityName
+                                                        : "بلا مدينة",
+                                                    style: kDetailETextStyle,
+                                                  ),
+                                                ],
+    ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 8),
+                                      child: SingleChildScrollView(
+                                        child: Wrap(
+                                          children: <Widget>[
+                                            Text(
+                                              "التفاصيل : ",
+                                              style: kDetailedTextStyle,
+                                            ),
+                                            Text(
+                                              widget.ads.body != null
+                                                  ? widget.ads.body
+                                                  : "",
+                                              style: kDetailETextStyle,
+                                              overflow: TextOverflow.visible,
+                                              maxLines: 10,
+                                              softWrap: true,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 8),
+                                      child: Wrap(
+                                        children: <Widget>[
+                                          Text(
+                                            "عدد زيارات الإعلان : ",
+                                            style: kDetailedTextStyle,
+                                          ),
+                                          Text(
+                                            widget.ads.views != null
+                                                ? widget.ads.views.toString()
+                                                : "0",
+                                            style: kDetailETextStyle,
+                                            overflow: TextOverflow.visible,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                      Wrap(
-                        children: <Widget>[
-                          Text(
-                            "المدينة : ",
-                          ),
-                          Text(
-                            widget.ads.cityName != null
-                                ? widget.ads.cityName
-                                : "بلا مدينة",
-                          ),
-                        ],
+                      Container(
+                        margin: EdgeInsets.only(left: 50, right: 50),
+                        height: height * .05,
+                        width: width,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            border: Border.all(color: mycolor, width: 3),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(30.0),
+                            ),
+                            color: mycolor),
+                        child: Center(
+                            child: Text(
+                          'تفاصيل الإعلان',
+                          style: kSizetStyle,
+                        )),
                       ),
-                      Row(
-                        children: [
-                          Wrap(
-                            children: <Widget>[
-                              Text(
-                                "عدد زيارات الإعلان : ",
-                              ),
-                              Text(
-                                widget.ads.views != null
-                                    ? widget.ads.views.toString()
-                                    : "0",
-                                overflow: TextOverflow.visible,
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
                     ],
                   ),
                 ),
+                // child: Container(
+                //   padding: EdgeInsets.all(5),
+                //   margin: EdgeInsets.symmetric(vertical: 5),
+                //   decoration: BoxDecoration(
+                //     color: mycolor,
+                //     borderRadius: BorderRadius.circular(5),
+                //   ),
+                //   child: Column(
+                //     crossAxisAlignment: CrossAxisAlignment.stretch,
+                //     children: [
+                //       Wrap(
+                //         children: <Widget>[
+                //           Text(
+                //             "الإسم : ",
+                //             style: kDetailedTextStyle,
+                //           ),
+                //           Text(
+                //             widget.ads.title != null
+                //                 ? widget.ads.title
+                //                 : "بلا إسم",
+                //             style: kDetailETextStyle,
+                //           ),
+                //         ],
+                //       ),
+                //       Text(
+                //         widget.ads.body != null ? widget.ads.body : "",
+                //         overflow: TextOverflow.visible,
+                //         maxLines: 10,
+                //         softWrap: true,
+                //       ),
+                //       Row(
+                //         children: [
+                //           Expanded(
+                //             flex: 1,
+                //             child: Wrap(
+                //               children: <Widget>[
+                //                 Text('السعر : '),
+                //                 Text(
+                //                   widget.ads.price != null
+                //                       ? widget.ads.price
+                //                       : "غير محدد",
+                //                 ),
+                //               ],
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //       Wrap(
+                //         children: <Widget>[
+                //           Text(
+                //             "المدينة : ",
+                //           ),
+                //           Text(
+                //             widget.ads.cityName != null
+                //                 ? widget.ads.cityName
+                //                 : "بلا مدينة",
+                //           ),
+                //         ],
+                //       ),
+                //       Row(
+                //         children: [
+                //           Wrap(
+                //             children: <Widget>[
+                //               Text(
+                //                 "عدد زيارات الإعلان : ",
+                //               ),
+                //               Text(
+                //                 widget.ads.views != null
+                //                     ? widget.ads.views.toString()
+                //                     : "0",
+                //                 overflow: TextOverflow.visible,
+                //               ),
+                //             ],
+                //           ),
+                //         ],
+                //       )
+                //     ],
+                //   ),
+                // ),
               ),
+
               SliverFixedExtentList(
                 itemExtent: height * .4,
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                    return Container(
-                      margin: EdgeInsets.symmetric(vertical: 5),
-                      color: mycolor,
-                      width: width,
-                      child: CachedNetworkImage(
-                          fadeInCurve: Curves.easeInBack,
-                          fit: BoxFit.contain,
-                          height: height * 0.4,
-                          width: width,
-                          imageUrl: widget.ads.images[index]),
+                    return Padding(
+                      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 5),
+                        color: mycolor,
+                        width: width,
+                        child: CachedNetworkImage(
+                            fadeInCurve: Curves.easeInBack,
+                            fit: BoxFit.fill,
+                            height: height * 0.4,
+                            width: width,
+                            imageUrl: widget.ads.images[index]),
+                      ),
                     );
                   },
                   childCount: widget.ads.images.length,

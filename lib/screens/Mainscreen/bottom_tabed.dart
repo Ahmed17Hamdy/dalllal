@@ -95,7 +95,7 @@ class _BottomTabbedState extends State<BottomTabbed> {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
       firstlog = _prefs.getBool("First_log") ?? false;
       username = _prefs.getString("User_name") ?? "";
-      userid = _prefs.getInt("User_id" ?? 0);
+      userid = _prefs.getInt("User_id" )?? 0;
     } catch (e) {
       print(e);
     }

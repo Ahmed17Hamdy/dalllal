@@ -49,7 +49,7 @@ const kTextFeild = InputDecoration(
   helperStyle: TextStyle(color: Color(0xFFDDB871), fontSize: 8),
   labelText: '',
   hintStyle: TextStyle(color: Color(0xFFDDB871)),
-  labelStyle: TextStyle(color: Color(0xFFDDB871), fontSize: 24),
+  labelStyle: TextStyle(color: Color(0xFFDDB871), fontSize: 18),
   errorStyle: TextStyle(
     fontSize: 10,
   ),

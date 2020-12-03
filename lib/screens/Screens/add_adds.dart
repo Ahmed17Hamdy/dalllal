@@ -168,7 +168,7 @@ class _AddAdsState extends State<AddAds> {
   Future<void> _fetchdata() async {
     final prefs = await SharedPreferences.getInstance();
     var response = prefs.getString("response");
-    userid = prefs.getInt("User_id");
+    userid = prefs.getInt("User_id")??0;
     if (response != null) {
       var f = jsonDecode(response);
       HomeClass data = new HomeClass.fromJson(f);
@@ -351,7 +351,6 @@ class _AddAdsState extends State<AddAds> {
         _btnController.reset();
 
         setState(() {
-
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => BottomTabbed()),
@@ -507,10 +506,13 @@ class _AddAdsState extends State<AddAds> {
                               subcatname = "التصنيف الثانوي";
                               _dropdownValue = newVal;
                               categoryname = newVal.name;
+                              if (categoryname == 'السيارات') {
+                                hide = true;
+                              } else {
+                                hide = false;
+                                hide1 = false;
+                              }
 
-                              categoryname == 'السيارات'
-                                  ? hide = true
-                                  : hide = false;
                               subList = subcategories
                                   .where(
                                       (subcat) => subcat.parentId == newVal.id)
@@ -520,6 +522,7 @@ class _AddAdsState extends State<AddAds> {
                                 _brand = 0;
                               } else {
                                 hide = false;
+                                hide1 = false;
                               }
                             });
                           },
