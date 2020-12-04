@@ -960,65 +960,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               SliverFixedExtentList(
                 delegate: SliverChildListDelegate(
                   [
-                    // Container(
-                    //   padding: EdgeInsets.all(5),
-                    //   margin: EdgeInsets.symmetric(vertical: 10),
-                    //   decoration: BoxDecoration(
-                    //     color: mycolor,
-                    //     borderRadius: BorderRadius.circular(5),
-                    //   ),
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: [
-                    //       Expanded(
-                    //         flex: 2,
-                    //         child: Text(
-                    //           widget.ads.title != null
-                    //               ? widget.ads.title
-                    //               : "بلا إسم",
-                    //           style: Theme.of(context).textTheme.bodyText1,
-                    //         ),
-                    //       ),
-                    //       Expanded(
-                    //         child: Text(
-                    //           widget.ads.timeAgo != null
-                    //               ? widget.ads.timeAgo
-                    //               : "",
-                    //           style: Theme.of(context).textTheme.bodyText2,
-                    //         ),
-                    //       ),
-                    //       Expanded(
-                    //         flex: 2,
-                    //         child: Row(
-                    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //           children: [
-                    //             Expanded(
-                    //               flex: 2,
-                    //               child: ListTile(
-                    //                 leading: Icon(Icons.person),
-                    //                 title: Text(
-                    //                   widget.ads.userName,
-                    //                   style:
-                    //                       Theme.of(context).textTheme.bodyText2,
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //             Expanded(
-                    //               child: ListTile(
-                    //                 leading: Icon(Icons.location_city),
-                    //                 title: Text(
-                    //                   widget.ads.area.name,
-                    //                   style:
-                    //                       Theme.of(context).textTheme.bodyText2,
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
+
 
                 Padding(
                   padding: EdgeInsets.only(top:5),
@@ -1425,85 +1367,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ],
                   ),
                 ),
-                // child: Container(
-                //   padding: EdgeInsets.all(5),
-                //   margin: EdgeInsets.symmetric(vertical: 5),
-                //   decoration: BoxDecoration(
-                //     color: mycolor,
-                //     borderRadius: BorderRadius.circular(5),
-                //   ),
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.stretch,
-                //     children: [
-                //       Wrap(
-                //         children: <Widget>[
-                //           Text(
-                //             "الإسم : ",
-                //             style: kDetailedTextStyle,
-                //           ),
-                //           Text(
-                //             widget.ads.title != null
-                //                 ? widget.ads.title
-                //                 : "بلا إسم",
-                //             style: kDetailETextStyle,
-                //           ),
-                //         ],
-                //       ),
-                //       Text(
-                //         widget.ads.body != null ? widget.ads.body : "",
-                //         overflow: TextOverflow.visible,
-                //         maxLines: 10,
-                //         softWrap: true,
-                //       ),
-                //       Row(
-                //         children: [
-                //           Expanded(
-                //             flex: 1,
-                //             child: Wrap(
-                //               children: <Widget>[
-                //                 Text('السعر : '),
-                //                 Text(
-                //                   widget.ads.price != null
-                //                       ? widget.ads.price
-                //                       : "غير محدد",
-                //                 ),
-                //               ],
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //       Wrap(
-                //         children: <Widget>[
-                //           Text(
-                //             "المدينة : ",
-                //           ),
-                //           Text(
-                //             widget.ads.cityName != null
-                //                 ? widget.ads.cityName
-                //                 : "بلا مدينة",
-                //           ),
-                //         ],
-                //       ),
-                //       Row(
-                //         children: [
-                //           Wrap(
-                //             children: <Widget>[
-                //               Text(
-                //                 "عدد زيارات الإعلان : ",
-                //               ),
-                //               Text(
-                //                 widget.ads.views != null
-                //                     ? widget.ads.views.toString()
-                //                     : "0",
-                //                 overflow: TextOverflow.visible,
-                //               ),
-                //             ],
-                //           ),
-                //         ],
-                //       )
-                //     ],
-                //   ),
-                // ),
+
               ),
 
               SliverFixedExtentList(
@@ -1686,65 +1550,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               SliverFixedExtentList(
                 delegate: SliverChildListDelegate(
                   [
-                    // Container(
-                    //   padding: EdgeInsets.all(5),
-                    //   margin: EdgeInsets.symmetric(vertical: 10),
-                    //   decoration: BoxDecoration(
-                    //     color: mycolor,
-                    //     borderRadius: BorderRadius.circular(5),
-                    //   ),
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: [
-                    //       Expanded(
-                    //         flex: 2,
-                    //         child: Text(
-                    //           widget.ads.title != null
-                    //               ? widget.ads.title
-                    //               : "بلا إسم",
-                    //           style: Theme.of(context).textTheme.bodyText1,
-                    //         ),
-                    //       ),
-                    //       Expanded(
-                    //         child: Text(
-                    //           widget.ads.timeAgo != null
-                    //               ? widget.ads.timeAgo
-                    //               : "",
-                    //           style: Theme.of(context).textTheme.bodyText2,
-                    //         ),
-                    //       ),
-                    //       Expanded(
-                    //         flex: 2,
-                    //         child: Row(
-                    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //           children: [
-                    //             Expanded(
-                    //               flex: 2,
-                    //               child: ListTile(
-                    //                 leading: Icon(Icons.person),
-                    //                 title: Text(
-                    //                   widget.ads.userName,
-                    //                   style:
-                    //                       Theme.of(context).textTheme.bodyText2,
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //             Expanded(
-                    //               child: ListTile(
-                    //                 leading: Icon(Icons.location_city),
-                    //                 title: Text(
-                    //                   widget.ads.area.name,
-                    //                   style:
-                    //                       Theme.of(context).textTheme.bodyText2,
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
+
 
                     Padding(
                       padding: EdgeInsets.only(top:5),
@@ -2033,7 +1839,352 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ),
                 itemExtent: height * .4,
               ),
+              SliverFixedExtentList(
+                delegate: SliverChildListDelegate(
+                  [
 
+
+                    Padding(
+                      padding: EdgeInsets.only(top:5),
+                      child:                 Container(
+                  height: height * .3,
+                  width: double.infinity,
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+                        child: Stack(
+                          alignment: Alignment.topCenter,
+                          children: <Widget>[
+                            Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  border: Border.all(color: mycolor, width: 3),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10.0),
+                                  ),
+                                  color: Colors.white,
+                                ),
+                                height: height * 0.4,
+                                child: FutureBuilder(
+                                    future: _future,
+                                    builder: (context, snapshot) {
+                                      switch (snapshot.connectionState) {
+                                        case ConnectionState.none:
+                                        case ConnectionState.waiting:
+                                        case ConnectionState.active:
+                                          return Center(
+                                            child: CircularProgressIndicator(),
+                                          );
+                                        case ConnectionState.done:
+                                          if (snapshot.hasError) {
+                                            DioError error = snapshot.error;
+                                            String message = error.message;
+                                            if (error.type ==
+                                                DioErrorType.CONNECT_TIMEOUT)
+                                              message = 'Connection Timeout';
+                                            else if (error.type ==
+                                                DioErrorType.RECEIVE_TIMEOUT)
+                                              message = 'Receive Timeout';
+                                            else if (error.type ==
+                                                DioErrorType.RESPONSE)
+                                              message =
+                                                  '404 server not found ${error.response.statusCode}';
+                                            return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 50),
+                                              child: RefreshIndicator(
+                                                  child: new ListView(
+                                                    children: <Widget>[
+                                                      Center(
+                                                        child: new Text(
+                                                            'خطأ في الإتصال بالشبكة '),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  onRefresh: () {
+                                                    return _future = _refresh();
+                                                  }),
+                                            );
+                                          }
+                                          Response response = snapshot.data;
+                                          Showpost data = new Showpost.fromJson(
+                                              response.data);
+                                          similaradsListforcity =
+                                              data.data[0].similarForCity;
+                                          for (var item
+                                              in similaradsListforcity) {
+                                            if (item.title == null) {
+                                              item.title = "بلا عنوان";
+                                            }
+                                            if (item.body == null) {
+                                              item.body = "بلا تفاصيل";
+                                            }
+                                            if (item.images.length == 0) {
+                                              item.images.insert(
+                                                  0,
+                                                  AssetImage('images/bc.jpg')
+                                                      .toString());
+                                            }
+                                            if (item.user.rank == null) {
+                                              item.user.rank = 0;
+                                            }
+                                            if (item.price == null ||
+                                                item.price == "") {
+                                              item.price = "غير محدد";
+                                            }
+                                          }
+                                          return RefreshIndicator(
+                                            onRefresh: () {
+                                              return _fetchdata();
+                                            },
+                                            child: similaradsListforcity
+                                                        .length !=
+                                                    0
+                                                ? ListView.builder(
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    itemCount:
+                                                        similaradsListforcity
+                                                            .length,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                bottom: 5,
+                                                                top: 20,
+                                                                right: 5,
+                                                                left: 5),
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            shape: BoxShape
+                                                                .rectangle,
+                                                            border: Border.all(
+                                                                color: mycolor,
+                                                                width: 3),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(
+                                                              Radius.circular(
+                                                                  10.0),
+                                                            ),
+                                                            color: Colors.white,
+                                                          ),
+                                                          width: width * .7,
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(5),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: <
+                                                                  Widget>[
+                                                                Expanded(
+                                                                  flex: 4,
+                                                                  child:
+                                                                      Container(
+                                                                    height:
+                                                                        height *
+                                                                            0.2,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      shape: BoxShape
+                                                                          .rectangle,
+                                                                      border: Border.all(
+                                                                          color:
+                                                                              mycolor,
+                                                                          width:
+                                                                              1),
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .all(
+                                                                        Radius.circular(
+                                                                            10.0),
+                                                                      ),
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                    child:
+                                                                        GestureDetector(
+                                                                      onTap: () => Navigator.push(
+                                                                          context,
+                                                                          MaterialPageRoute(
+                                                                              builder: (_) => DetailsScreen(
+                                                                                    ads: similaradsListforcity[index],
+                                                                                  ))),
+                                                                      child:
+                                                                          CachedNetworkImage(
+                                                                        fadeInCurve:
+                                                                            Curves.easeInBack,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                        width:
+                                                                            width,
+                                                                        imageUrl:
+                                                                            similaradsListforcity[index].images[0],
+                                                                        placeholder:
+                                                                            (context, url) =>
+                                                                                Center(child: CircularProgressIndicator()),
+                                                                        errorWidget: (context,
+                                                                                url,
+                                                                                error) =>
+                                                                            Image.asset(
+                                                                          'images/bc.jpg',
+                                                                          width:
+                                                                              width,
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Expanded(
+                                                                  flex: 1,
+                                                                  child: Row(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: <
+                                                                        Widget>[
+                                                                      Expanded(
+                                                                          child: Text(similaradsListforcity[index].title != null
+                                                                              ? similaradsListforcity[index].title
+                                                                              : "بلا إسم")),
+                                                                      Expanded(
+                                                                        child:
+                                                                            RatingBar(
+                                                                          ignoreGestures:
+                                                                              true,
+                                                                          itemSize:
+                                                                              height * 0.03,
+                                                                          initialRating: similaradsListforcity[index].user.rank != null
+                                                                              ? similaradsListforcity[index].user.rank.toDouble()
+                                                                              : 0,
+                                                                          minRating:
+                                                                              0,
+                                                                          direction:
+                                                                              Axis.horizontal,
+                                                                          allowHalfRating:
+                                                                              false,
+                                                                          itemCount:
+                                                                              5,
+                                                                          itemBuilder: (context, _) =>
+                                                                              Icon(
+                                                                            Icons.star,
+                                                                            size:
+                                                                                1,
+                                                                            color:
+                                                                                mycolor,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  )
+                                                : Center(
+                                                    child: Text(
+                                                        "لا يوجد إعلانات مشابهة ")),
+                                          );
+                                      }
+                                    })),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 50, right: 50),
+                        height: height * .07,
+                        width: width,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            border: Border.all(color: mycolor, width: 3),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(30.0),
+                            ),
+                            color: mycolor),
+                        child: Center(
+                            child: Text(
+                          'إعلانات مشابهة داخل المدينة',
+                          style: kSizetStyle,
+                          textAlign: TextAlign.center,
+                        )),
+                      ),
+                    ],
+                  ),
+                ),
+                    ),
+                  ],
+                ),
+                itemExtent: height * .4,
+              ),
+              SliverFixedExtentList(
+                delegate: SliverChildListDelegate(
+                  [
+
+
+                Visibility(
+                  visible: widget.ads.parentId == 1 || widget.ads.parentId == 2
+                      ? true
+                      : false,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          border: Border.all(color: mycolor, width: 3),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15.0),
+                          ),
+                          color: Colors.white),
+                      height: height * .2,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text(
+                            widget.ads.parentId != 1
+                                ? "للإستشارة وتقييم العقار "
+                                : "للإستشارة وفحص السيارة",
+                            style: TextStyle(color: mycolor),
+                            textAlign: TextAlign.center,
+                          ),
+                          GestureDetector(
+                            onTap: () => _sendwhatsappforapp,
+                            child: Icon(
+                              FontAwesomeIcons.whatsapp,
+                              size: 50,
+                              color: Color(0xFFDDB871),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+
+
+
+                ),
+                itemExtent: height * .15,
+              ),
               // SliverToBoxAdapter(
               //   child: Container(
               //     height: height * .5,
@@ -3025,286 +3176,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
 //                 SizedBox(
 //                   height: 10,
 //                 ),
-//                 Container(
-//                   height: height * .3,
-//                   width: double.infinity,
-//                   child: Stack(
-//                     alignment: Alignment.topCenter,
-//                     children: <Widget>[
-//                       Padding(
-//                         padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
-//                         child: Stack(
-//                           alignment: Alignment.topCenter,
-//                           children: <Widget>[
-//                             Container(
-//                                 decoration: BoxDecoration(
-//                                   shape: BoxShape.rectangle,
-//                                   border: Border.all(color: mycolor, width: 3),
-//                                   borderRadius: BorderRadius.all(
-//                                     Radius.circular(10.0),
-//                                   ),
-//                                   color: Colors.white,
-//                                 ),
-//                                 height: height * 0.4,
-//                                 child: FutureBuilder(
-//                                     future: _future,
-//                                     builder: (context, snapshot) {
-//                                       switch (snapshot.connectionState) {
-//                                         case ConnectionState.none:
-//                                         case ConnectionState.waiting:
-//                                         case ConnectionState.active:
-//                                           return Center(
-//                                             // ignore: missing_return
-//                                             child: CircularProgressIndicator(),
-//                                           );
-//                                         case ConnectionState.done:
-//                                           if (snapshot.hasError) {
-//                                             // ignore: missing_return
-//                                             DioError error = snapshot.error;
-//                                             String message = error.message;
-//                                             if (error.type ==
-//                                                 DioErrorType.CONNECT_TIMEOUT)
-//                                               message = 'Connection Timeout';
-//                                             else if (error.type ==
-//                                                 DioErrorType.RECEIVE_TIMEOUT)
-//                                               message = 'Receive Timeout';
-//                                             else if (error.type ==
-//                                                 DioErrorType.RESPONSE)
-//                                               message =
-//                                                   '404 server not found ${error.response.statusCode}';
-//                                             return Padding(
-//                                               padding: const EdgeInsets.only(
-//                                                   top: 50),
-//                                               child: RefreshIndicator(
-//                                                   child: new ListView(
-//                                                     children: <Widget>[
-//                                                       Center(
-//                                                         child: new Text(
-//                                                             'خطأ في الإتصال بالشبكة '),
-//                                                       ),
-//                                                     ],
-//                                                   ),
-//                                                   onRefresh: () {
-//                                                     return _future = _refresh();
-//                                                   }),
-//                                             );
-//                                           }
-//                                           Response response = snapshot.data;
-//                                           Showpost data = new Showpost.fromJson(
-//                                               response.data);
-//                                           similaradsList =
-//                                               data.data[0].similarPosts;
-//                                           for (var item in similaradsList) {
-//                                             if (item.title == null) {
-//                                               item.title = "بلا عنوان";
-//                                             }
-//                                             if (item.body == null) {
-//                                               item.body = "بلا تفاصيل";
-//                                             }
-//                                             if (item.images.length == 0) {
-//                                               item.images.insert(
-//                                                   0,
-//                                                   AssetImage('images/bc.jpg')
-//                                                       .toString());
-//                                             }
-//                                             if (item.user.rank == null) {
-//                                               item.user.rank = 0;
-//                                             }
-//                                             if (item.price == null ||
-//                                                 item.price == "") {
-//                                               item.price = "غير محدد";
-//                                             }
-//                                           }
-//                                           return RefreshIndicator(
-//                                             onRefresh: () {
-//                                               return _fetchdata();
-//                                             },
-//                                             child: similaradsList.length != 0
-//                                                 ? ListView.builder(
-//                                                     scrollDirection:
-//                                                         Axis.horizontal,
-//                                                     itemCount:
-//                                                         similaradsList.length,
-//                                                     itemBuilder:
-//                                                         (BuildContext context,
-//                                                             int index) {
-//                                                       return Padding(
-//                                                         padding:
-//                                                             const EdgeInsets
-//                                                                     .only(
-//                                                                 bottom: 5,
-//                                                                 top: 20,
-//                                                                 right: 5,
-//                                                                 left: 5),
-//                                                         child: Container(
-//                                                           decoration:
-//                                                               BoxDecoration(
-//                                                             shape: BoxShape
-//                                                                 .rectangle,
-//                                                             border: Border.all(
-//                                                                 color: mycolor,
-//                                                                 width: 3),
-//                                                             borderRadius:
-//                                                                 BorderRadius
-//                                                                     .all(
-//                                                               Radius.circular(
-//                                                                   10.0),
-//                                                             ),
-//                                                             color: Colors.white,
-//                                                           ),
-//                                                           width: width * .7,
-//                                                           child: Padding(
-//                                                             padding:
-//                                                                 const EdgeInsets
-//                                                                     .all(5),
-//                                                             child: Column(
-//                                                               crossAxisAlignment:
-//                                                                   CrossAxisAlignment
-//                                                                       .start,
-//                                                               children: <
-//                                                                   Widget>[
-//                                                                 Expanded(
-//                                                                   flex: 4,
-//                                                                   child:
-//                                                                       Container(
-//                                                                     height:
-//                                                                         height *
-//                                                                             0.2,
-//                                                                     decoration:
-//                                                                         BoxDecoration(
-//                                                                       shape: BoxShape
-//                                                                           .rectangle,
-//                                                                       border: Border.all(
-//                                                                           color:
-//                                                                               mycolor,
-//                                                                           width:
-//                                                                               1),
-//                                                                       borderRadius:
-//                                                                           BorderRadius
-//                                                                               .all(
-//                                                                         Radius.circular(
-//                                                                             10.0),
-//                                                                       ),
-//                                                                       color: Colors
-//                                                                           .white,
-//                                                                     ),
-//                                                                     child:
-//                                                                         GestureDetector(
-//                                                                       onTap: () => Navigator.push(
-//                                                                           context,
-//                                                                           MaterialPageRoute(
-//                                                                               builder: (_) => DetailsScreen(
-//                                                                                     ads: similaradsList[index],
-//                                                                                   ))),
-//                                                                       child:
-//                                                                           CachedNetworkImage(
-//                                                                         fadeInCurve:
-//                                                                             Curves.easeInBack,
-//                                                                         fit: BoxFit
-//                                                                             .cover,
-//                                                                         width:
-//                                                                             width,
-//                                                                         imageUrl:
-//                                                                             similaradsList[index].images[0],
-//                                                                         placeholder:
-//                                                                             (context, url) =>
-//                                                                                 CircularProgressIndicator(),
-//                                                                         errorWidget: (context,
-//                                                                                 url,
-//                                                                                 error) =>
-//                                                                             Image.asset(
-//                                                                           'images/bc.jpg',
-//                                                                           width:
-//                                                                               width,
-//                                                                           fit: BoxFit
-//                                                                               .cover,
-//                                                                         ),
-//                                                                       ),
-//                                                                     ),
-//                                                                   ),
-//                                                                 ),
-//                                                                 Expanded(
-//                                                                   flex: 1,
-//                                                                   child: Row(
-//                                                                     crossAxisAlignment:
-//                                                                         CrossAxisAlignment
-//                                                                             .start,
-//                                                                     mainAxisAlignment:
-//                                                                         MainAxisAlignment
-//                                                                             .spaceBetween,
-//                                                                     children: <
-//                                                                         Widget>[
-//                                                                       Expanded(
-//                                                                           child: Text(similaradsList[index].title != null
-//                                                                               ? similaradsList[index].title
-//                                                                               : "بلا إسم")),
-//                                                                       Expanded(
-//                                                                         child:
-//                                                                             RatingBar(
-//                                                                           ignoreGestures:
-//                                                                               true,
-//                                                                           itemSize:
-//                                                                               height * 0.03,
-//                                                                           initialRating: similaradsList[index].user.rank != null
-//                                                                               ? similaradsList[index].user.rank.toDouble()
-//                                                                               : 0,
-//                                                                           minRating:
-//                                                                               0,
-//                                                                           direction:
-//                                                                               Axis.horizontal,
-//                                                                           allowHalfRating:
-//                                                                               false,
-//                                                                           itemCount:
-//                                                                               5,
-//                                                                           itemBuilder: (context, _) =>
-//                                                                               Icon(
-//                                                                             Icons.star,
-//                                                                             size:
-//                                                                                 1,
-//                                                                             color:
-//                                                                                 mycolor,
-//                                                                           ),
-//                                                                         ),
-//                                                                       ),
-//                                                                     ],
-//                                                                   ),
-//                                                                 )
-//                                                               ],
-//                                                             ),
-//                                                           ),
-//                                                         ),
-//                                                       );
-//                                                     },
-//                                                   )
-//                                                 : Center(
-//                                                     child: Text(
-//                                                         "لا يوجد إعلانات مشابهة ")),
-//                                           );
-//                                       }
-//                                     })),
-//                           ],
-//                         ),
-//                       ),
-//                       Container(
-//                         margin: EdgeInsets.only(left: 50, right: 50),
-//                         height: height * .05,
-//                         width: width,
-//                         decoration: BoxDecoration(
-//                             shape: BoxShape.rectangle,
-//                             border: Border.all(color: mycolor, width: 3),
-//                             borderRadius: BorderRadius.all(
-//                               Radius.circular(30.0),
-//                             ),
-//                             color: mycolor),
-//                         child: Center(
-//                             child: Text(
-//                           'الإعلانات المشابهة',
-//                           style: kSizetStyle,
-//                         )),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
+//                 
 //                 SizedBox(height: 10),
 //                 Container(
 //                   height: height * .3,
